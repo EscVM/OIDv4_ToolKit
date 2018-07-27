@@ -12,7 +12,7 @@ In particular, with this practical toolkit written in Python3 we give you the fo
 * use the practical visualizer to inspect the donwloaded classes
 
 The code is quite documented and designed to be easy to extend and improve. 
-We are pleased if our little bit of code can help you with your project and research. Enjoy ;)+
+Me and [Angelo](https://github.com/keldrom) are pleased if our little bit of code can help you with your project and research. Enjoy ;)
 
 ![Snippet of the OIDv4 available classes](images/classes.png)
 
@@ -33,16 +33,20 @@ It's important to underline that some annotations has been done as a group. It m
 That's again an option of the toolkit that can be used to only grasp the desired images. 
 
 Finally, it's interesting to notice that not all annotations has been produced by humans, but the creator also exploited an enhanced version of the method shown here reported [1](#reference)
+
 # Getting Started
 
 ## Installation
+
+Python3 is required.
+
 1. Clone this repository
    ```bash
    git clone https://github.com/EscVM/OIDv4_ToolKit.git
    ```
 2. Install the required packages
    ```bash
-   pep3 install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 Peek inside the requirements file if you have everything already installed. Most of the dependencies are common libraries.
 
@@ -57,7 +61,9 @@ or in the following way to get more information
    ```
    
 # Use the Toolkit to download
-As previously mentioned, there are different available options that can be exploted. Let's see some of them.
+The toolkit permit the download of your dataset in the folder you want (`Dataset`as default). The folder can be imposed with the argument 
+`--Dataset` so you can make different dataset with different options inside.
+As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
 ## Download different classes in separated folders
 Firstly, the toolkit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes.
@@ -121,7 +127,7 @@ In the original dataset the coordinates of the bounding boxes are made in the fo
 
 However, in order to accomodate a more intuitive representation and give the maximum flexibility, every `.txt` annotation is made like:
 
-`name_of_the_class    name_of_the_class    left    top     right     bottom`
+`name_of_the_class    left    top     right     bottom`
 
 ### Optional Arguments
 The annotations of the dataset has been marked with a bunch of boolean values. This attributes are reported below:
@@ -139,13 +145,27 @@ For example, with:
 only images without group annotations are downloaded.
 
 ## Download multiple classes in a common folder
-This option allows to download more classes, but in a common folder. Also the related notations are mixed together with the already explained format (the first element is always the name of the class). In this way, with a simple dictionary it's easy to parse the generated label to get the desired format.
+This option allows to download more classes, but in a common folder. Also the related notations are mixed together with
+ the already explained format (the first element is always the name of the single class). In this way, with a simple 
+ dictionary it's easy to parse the generated label to get the desired format.
 
 Again if we want to download Apple and Oranges, but in a common folder
   ```bash
    python3 main.py download --classes Apple Orange --type_csv validation --multiclasses 1
    ```
-## Citation
+#Use the toolkit to visualize the labeled images
+The toolkit is useful also for visualize the downloaded images with the respective labels.
+```bash
+   python3 main.py visualize 
+   ```
+  In this way the default `Dataset` folder will be pointed to search the images and labels automatically. To point
+  another folder it's possible to use `--Dataset` optional argument.
+```bash
+   python3 main.py visualize --Dataset desired_folder 
+   ```
+Then the system will ask you what folder visualize (train, validation or test) and the class.
+Hence with `d` (next), `a` (previous) and `w` (exit) you will be able to explore all the images.
+# Citation
 Use this bibtex if you want to cite this repository:
 ```
 @misc{OIDv4_ToolKit,
