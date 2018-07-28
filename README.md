@@ -1,6 +1,6 @@
 # OIDv4 ToolKit for Object Detection
 
-Do you want to build your personal object detector but you don't have enough images to train your model? Have you already discovered [Open Images Dataset v4](https://storage.googleapis.com/openimages/web/index.html) that has [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes and more than 1,700,000 images ready to use, but you don't know how to use it? Do you want to exploit it for your projects but you don't want to download 18 TB of data!?
+Do you want to build your personal object detector but you don't have enough images to train your model? Have you already discovered [Open Images Dataset v4](https://storage.googleapis.com/openimages/web/index.html) that has [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes and more than 1,700,000 images ready to use, but you don't know how to use it? Do you want to exploit it for your projects but you don't want to download more than 500 GB of data!?
 
 With this repository we can help you to get the best of this dataset with less effort as possible.
 In particular, with this practical toolkit written in Python3, we give you the following options:
