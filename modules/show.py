@@ -15,7 +15,7 @@ def show(class_name, download_dir, label_dir, index):
     if not os.listdir(download_dir)[index].endswith('.jpg'):
         index += 2
     img_file = os.listdir(download_dir)[index]
-    current_image_path = os.path.join(download_dir, img_file)
+    current_image_path = str(os.path.join(download_dir, img_file))
     img = cv2.imread(current_image_path)
     file_name = str(img_file.split('.')[0]) + '.txt'
     file_path = os.path.join(label_dir, file_name)
@@ -23,8 +23,8 @@ def show(class_name, download_dir, label_dir, index):
 
     for line in f:
         ax = line.split(' ')
-        cv2.rectangle(img, (int(float(ax[1])), int(float(ax[2]))),
-                      (int(float(ax[3])),
-                       int(float(ax[4]))), (0, 255, 0), 3)
+        cv2.rectangle(img, (int(float(ax[-4])), int(float(ax[-3]))),
+                      (int(float(ax[-2])),
+                       int(float(ax[-1]))), (0, 255, 0), 3)
 
     cv2.imshow(class_name, img)
