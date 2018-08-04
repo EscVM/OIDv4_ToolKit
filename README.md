@@ -1,13 +1,13 @@
 # OIDv4 ToolKit for Object Detection
 
-Do you want to build your personal object detector but you don't have enough images to train your model? Have you already discovered [Open Images Dataset v4](https://storage.googleapis.com/openimages/web/index.html) that has [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes and more than 1,700,000 images ready to use, but you don't know how to use it? Do you want to exploit it for your projects but you don't want to download more than 500 GB of data!?
+Do you want to build your personal object detector but you don't have enough images to train your model? Have you already discovered [Open Images Dataset v4](https://storage.googleapis.com/openimages/web/index.html) that has [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes and more than 1,700,000 images ready to use? Do you want to exploit it for your projects but you don't want to download 18 TB of data?
 
 With this repository we can help you to get the best of this dataset with less effort as possible.
-In particular, with this practical toolkit written in Python3, we give you the following options:
+In particular, with this practical toolkit written in Python3 we give you the following options:
 
 * download any class of the dataset individually, taking care of creating the related bounding boxes for each downloaded image
 * download multiple classes at the same time creating separated folder and bounding boxes for each of them
-* download multiple classes and creating a common folder for all of them with a unique annotation file for each image
+* download multiple classes and creating a common folder for all of them with a unique annotation file of each image
 * download a single class or multiple classes with the desired [attributes](https://storage.googleapis.com/openimages/web/download.html)
 * use the practical visualizer to inspect the donwloaded classes
 
@@ -51,7 +51,7 @@ Python3 is required.
 Peek inside the requirements file if you have everything already installed. Most of the dependencies are common libraries.
 
 ## Launch the toolkit to check the available options
-First of all, if you simply want a quick reminder of al the possible options given by the script, you can simply launch, from your console of choice, the [main.py](main.py). Remember to point always at the main directory of the project.
+First of all, if you simply want a quick reminder of al the possible options given by the script, you can simply launch, from your console of choice, the [main.py](main.py). Remember to point always at the main directory of the project
    ```bash
    python3 main.py
    ```
@@ -62,7 +62,8 @@ or in the following way to get more information
    
 # Use the Toolkit to download
 The toolkit permit the download of your dataset in the folder you want (`Dataset`as default). The folder can be imposed with the argument 
-`--Dataset` so you can make different dataset with different options inside.
+`--Dataset` so you can make different dataset with different options inside. Note: for class that is composed by different
+words please use the `_` instead of the space; example: `Polar_bear`.
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
 ## Download different classes in separated folders
@@ -153,7 +154,7 @@ Again if we want to download Apple and Oranges, but in a common folder
   ```bash
    python3 main.py download --classes Apple Orange --type_csv validation --multiclasses 1
    ```
-# Use the toolkit to visualize the labeled images
+#Use the toolkit to visualize the labeled images
 The toolkit is useful also for visualize the downloaded images with the respective labels.
 ```bash
    python3 main.py visualize 
@@ -165,12 +166,7 @@ The toolkit is useful also for visualize the downloaded images with the respecti
    ```
 Then the system will ask you what folder visualize (train, validation or test) and the class.
 Hence with `d` (next), `a` (previous) and `w` (exit) you will be able to explore all the images.
-
-<p align="center">
-  <img width="540" height="303" src="images/visualizer_example.gif">
-</p>
-
-# Citation
+## Citation
 Use this bibtex if you want to cite this repository:
 ```
 @misc{OIDv4_ToolKit,
