@@ -7,10 +7,12 @@
 
 """
 OID v4 Downloader
-Download specific classes from the huge online dataset Open Image Dataset.
+Download specific classes of the huge online dataset Open Image Dataset.
 
-Licensed under the GNU General Public License v3.0 (see LICENSE for details)
+Licensed under the MIT License (see LICENSE for details)
 ------------------------------------------------------------
+
+Usage:
 """
 
 
@@ -52,6 +54,8 @@ if __name__ == '__main__':
 
         folder = ['train', 'validation', 'test']
         file_list = ['train-annotations-bbox.csv', 'validation-annotations-bbox.csv', 'test-annotations-bbox.csv']
+
+        args.classes = [arg.replace('_', ' ') for arg in args.classes]
 
         if args.multiclasses == '0':
 
