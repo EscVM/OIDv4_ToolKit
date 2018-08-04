@@ -50,7 +50,7 @@ def download_img(folder, dataset_dir, class_name, images_list):
     if len(images_list) > 0:
         print("[INFO] Download of {} images in {}.".format(len(images_list), folder))
         for image in tqdm(images_list):
-            path = image_dir + '/' + str(image) + '.jpg ' + download_dir
+            path = image_dir + '/' + str(image) + '.jpg ' + '"' + download_dir + '"'
             command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path
             os.system(command)
 
