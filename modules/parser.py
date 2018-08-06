@@ -41,4 +41,8 @@ def parser_arguments():
                        metavar="0 (default) or 1",
                        help='Download different classes separately (0) or together (1)')
 
+    parser.add_argument('--n_jobs', required=False, metavar="default 4",
+                       help='Num of the threads to use')
+
+
     return parser.parse_args()
