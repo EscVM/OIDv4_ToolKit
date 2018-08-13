@@ -74,35 +74,35 @@ if __name__ == '__main__':
                 if args.type_csv == 'train':
                     name_file = file_list[0]
                     df_val = TTV(csv_dir, name_file)
-                    if not args.n_jobs:
+                    if not args.threads:
                         download(args, df_val, folder[0], dataset_dir, class_name, class_code)
                     else:
-                        download(args, df_val, folder[0], dataset_dir, class_name, class_code, threads = int(args.n_jobs))
+                        download(args, df_val, folder[0], dataset_dir, class_name, class_code, threads = int(args.threads))
 
                 elif args.type_csv == 'validation':
                     name_file = file_list[1]
                     df_val = TTV(csv_dir, name_file)
-                    if not args.n_jobs:
+                    if not args.threads:
                         download(args, df_val, folder[1], dataset_dir, class_name, class_code)
                     else:
-                        download(args, df_val, folder[1], dataset_dir, class_name, class_code, threads = int(args.n_jobs))
+                        download(args, df_val, folder[1], dataset_dir, class_name, class_code, threads = int(args.threads))
 
                 elif args.type_csv == 'test':
                     name_file = file_list[2]
                     df_val = TTV(csv_dir, name_file)
-                    if not args.n_jobs:
+                    if not args.threads:
                         download(args, df_val, folder[2], dataset_dir, class_name, class_code)
                     else:
-                        download(args, df_val, folder[2], dataset_dir, class_name, class_code, threads = int(args.n_jobs))
+                        download(args, df_val, folder[2], dataset_dir, class_name, class_code, threads = int(args.threads))
 
                 elif args.type_csv == 'all':
                     for i in range(3):
                         name_file = file_list[i]
                         df_val = TTV(csv_dir, name_file)
-                        if not args.n_jobs:
+                        if not args.threads:
                             download(args, df_val, folder[i], dataset_dir, class_name, class_code)
                         else:
-                            download(args, df_val, folder[i], dataset_dir, class_name, class_code, threads = int(args.n_jobs))
+                            download(args, df_val, folder[i], dataset_dir, class_name, class_code, threads = int(args.threads))
                 else:
                     print('[ERROR] csv file not specified')
                     exit(1)
@@ -126,35 +126,35 @@ if __name__ == '__main__':
                 if args.type_csv == 'train':
                     name_file = file_list[0]
                     df_val = TTV(csv_dir, name_file)
-                    if not args.n_jobs:
+                    if not args.threads:
                         download(args, df_val, folder[0], dataset_dir, class_name, class_dict[class_name], class_list)
                     else:
-                        download(args, df_val, folder[0], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_jobs))
+                        download(args, df_val, folder[0], dataset_dir, class_name, class_dict[class_name], class_list, int(args.threads))
 
                 elif args.type_csv == 'validation':
                     name_file = file_list[1]
                     df_val = TTV(csv_dir, name_file)
-                    if not args.n_jobs:
+                    if not args.threads:
                         download(args, df_val, folder[1], dataset_dir, class_name, class_dict[class_name], class_list)
                     else:
-                        download(args, df_val, folder[1], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_jobs))
+                        download(args, df_val, folder[1], dataset_dir, class_name, class_dict[class_name], class_list, int(args.threads))
 
                 elif args.type_csv == 'test':
                     name_file = file_list[2]
                     df_val = TTV(csv_dir, name_file)
-                    if not args.n_jobs:
+                    if not args.threads:
                         download(args, df_val, folder[2], dataset_dir, class_name, class_dict[class_name], class_list)
                     else:
-                        download(args, df_val, folder[2], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_jobs))
+                        download(args, df_val, folder[2], dataset_dir, class_name, class_dict[class_name], class_list, int(args.threads))
 
                 elif args.type_csv == 'all':
                     for i in range(3):
                         name_file = file_list[i]
                         df_val = TTV(csv_dir, name_file)
-                        if not args.n_jobs:
+                        if not args.threads:
                             download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list)
                         else:
-                            download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_jobs))
+                            download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list, int(args.threads))
 
 
     elif args.command == 'visualize':
