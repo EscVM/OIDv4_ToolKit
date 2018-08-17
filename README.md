@@ -62,8 +62,12 @@ or in the following way to get more information
    
 # Use the Toolkit to download
 The toolkit permit the download of your dataset in the folder you want (`Dataset`as default). The folder can be imposed with the argument 
-`--Dataset` so you can make different dataset with different options inside. Note: for class that is composed by different
-words please use the `_` instead of the space; example: `Polar_bear`.
+`--Dataset` so you can make different dataset with different options inside. 
+
+**Note**: for classes that are composed by different
+words please use the `_` character instead of the space. 
+Example: `Polar_bear`.
+
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
 ## Download different classes in separated folders
@@ -154,7 +158,7 @@ Again if we want to download Apple and Oranges, but in a common folder
   ```bash
    python3 main.py download --classes Apple Orange --type_csv validation --multiclasses 1
    ```
-#Use the toolkit to visualize the labeled images
+# Use the toolkit to visualize the labeled images
 The toolkit is useful also for visualize the downloaded images with the respective labels.
 ```bash
    python3 main.py visualize 
@@ -166,6 +170,11 @@ The toolkit is useful also for visualize the downloaded images with the respecti
    ```
 Then the system will ask you what folder visualize (train, validation or test) and the class.
 Hence with `d` (next), `a` (previous) and `w` (exit) you will be able to explore all the images.
+
+<p align="center">
+  <img width="540" height="303" src="images/visualizer_example.gif">
+</p>
+
 ## Citation
 Use this bibtex if you want to cite this repository:
 ```
