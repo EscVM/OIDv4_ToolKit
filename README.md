@@ -126,10 +126,6 @@ In the original dataset the coordinates of the bounding boxes are made in the fo
 
 **XMin**, **XMax**, **YMin**, **YMax**: coordinates of the box, in normalized image coordinates. XMin is in [0,1], where 0 is the leftmost pixel, and 1 is the rightmost pixel in the image. Y coordinates go from the top pixel (0) to the bottom pixel (1).
 
-However, in order to accomodate a more intuitive representation and give the maximum flexibility, every `.txt` annotation is made like:
-
-`name_of_the_class    left    top     right     bottom`
-
 ### Optional Arguments
 The annotations of the dataset has been marked with a bunch of boolean values. This attributes are reported below:
 - **IsOccluded**: Indicates that the object is occluded by another object in the image.
