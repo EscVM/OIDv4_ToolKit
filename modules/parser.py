@@ -8,7 +8,7 @@ def parser_arguments():
     '''
     parser = argparse.ArgumentParser(description='Open Image Dataset Downloader', 
                                      epilog='Example: \n \
-                                     python main.py -download --c')
+                                     python3 main.py download --classes Apple --type_csv validation --threads 50')
 
     parser.add_argument("command",
                         metavar="<command> 'download' or 'visualize'",
