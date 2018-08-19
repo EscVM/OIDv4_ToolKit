@@ -203,8 +203,7 @@ if __name__ == '__main__':
                         index += 1
                     show(class_name, download_dir, label_dir, index)
                     if len(os.listdir(download_dir))-1 == index+1:
-                        cv2.destroyAllWindows()
-                        break
+                        index = 0
                 elif k == ord('a'):
                     cv2.destroyAllWindows()
                     if index > 0:
