@@ -1,5 +1,6 @@
 import cv2
 import os
+import pandas as pd
 
 def show(class_name, download_dir, label_dir, index):
     '''
@@ -12,19 +13,22 @@ def show(class_name, download_dir, label_dir, index):
     :return: None
     '''
     cv2.namedWindow(class_name, cv2.WINDOW_NORMAL)
-    if not os.listdir(download_dir)[index].endswith('.jpg'):
-        index += 2
-    img_file = os.listdir(download_dir)[index]
+    if len(os.listdir(label_dir)) == 1:
+        df = pd.read_csv(label_dir+'/'+class_name+'.csv')
+    else:
+    	names = os.listdir(label_dir)
+    	df = pd.read_csv(label_dir+'/'+names[0])
+    	for name in names:
+    		df = pd.concat((df, pd.read_csv(label_dir+'/'+names[0])))
+
+    imgid = df['ImageID'].unique()[index]
+    img_file = imgid+'.jpg'
     current_image_path = str(os.path.join(download_dir, img_file))
     img = cv2.imread(current_image_path)
-    file_name = str(img_file.split('.')[0]) + '.txt'
-    file_path = os.path.join(label_dir, file_name)
-    f = open(file_path, 'r')
 
-    for line in f:
-        ax = line.split(' ')
-        cv2.rectangle(img, (int(float(ax[-4])), int(float(ax[-3]))),
-                      (int(float(ax[-2])),
-                       int(float(ax[-1]))), (0, 255, 0), 3)
+    for line in df[df['ImageID']==imgid][['XMin', 'XMax', 'YMin', 'YMax']].values:
+        xmin, xmax, ymin, ymax = line
+        xmin, xmax, ymin, ymax = int(xmin*img.shape[1]), int(xmax*img.shape[1]), int(ymin*img.shape[0]), int(ymax*img.shape[0])
+        cv2.rectangle(img, (xmax, ymax),(xmin, ymin), (0, 255, 0), 6)
 
     cv2.imshow(class_name, img)

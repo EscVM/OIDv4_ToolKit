@@ -197,12 +197,14 @@ if __name__ == '__main__':
                 progression_bar(len(os.listdir(download_dir))-1, index+1)
 
                 k = cv2.waitKey(0) & 0xFF
-
                 if k == ord('d'):
                     cv2.destroyAllWindows()
                     if index < len(os.listdir(download_dir)) - 2:
                         index += 1
                     show(class_name, download_dir, label_dir, index)
+                    if len(os.listdir(download_dir))-1 == index+1:
+                        cv2.destroyAllWindows()
+                        break
                 elif k == ord('a'):
                     cv2.destroyAllWindows()
                     if index > 0:
@@ -211,3 +213,4 @@ if __name__ == '__main__':
                 elif k == ord('w'):
                     cv2.destroyAllWindows()
                     break
+

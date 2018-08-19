@@ -6,7 +6,9 @@ def parser_arguments():
 
     :return: parser
     '''
-    parser = argparse.ArgumentParser(description='Open Image Dataset Downloader')
+    parser = argparse.ArgumentParser(description='Open Image Dataset Downloader', 
+                                     epilog='Example: \n \
+                                     python main.py -download --c')
 
     parser.add_argument("command",
                         metavar="<command> 'download' or 'visualize'",
@@ -39,10 +41,10 @@ def parser_arguments():
 
     parser.add_argument('--multiclasses', required=False, default='0', choices=['0', '1'],
                        metavar="0 (default) or 1",
-                       help='Download different classes separately (0) or together (1)')
+                       help='Download different classes separately (0) or together (1).')
 
-    parser.add_argument('--threads', required=False, metavar="default 4",
-                       help='Number of the threads to use, when downloading images.')
+    parser.add_argument('--threads', required=False, metavar="default 20",
+                       help='Number of the threads to use, when downloading images. You can set up to 200.')
 
 
     return parser.parse_args()

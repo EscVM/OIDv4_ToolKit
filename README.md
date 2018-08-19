@@ -67,11 +67,11 @@ words please use the `_` instead of the space; example: `Polar_bear`.
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
 ## Download different classes in separated folders
-Firstly, the toolkit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes.
+Firstly, the toolkit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes. We'd recommend you to set `--threads` to increase download speed.
 
 Let's for example download Apples and Oranges from the validation set. In this case we have to use the following command.
   ```bash
-   python3 main.py download --classes Apple Orange --type_csv validation 
+   python3 main.py download --classes Apple Orange --type_csv validation --threads 50
    ```
 The algorith will take care to download all the necessary files and build the directory structure like this:
 
