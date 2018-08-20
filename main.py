@@ -161,11 +161,30 @@ if __name__ == '__main__':
 
         while (True):
 
-            print("Which folder do you want to visualize (train, test, validation)? <exit>")
-            image_dir = input("> ")
-            if image_dir == 'exit':
+            print(dedent("""  
+                --------------------------------------------------------
+                Input number which folder do you want to visualize:
+
+                         - train - 1 
+                         - test - 2
+                         - validation - 3 
+                         
+                    - To exit - 0
+                --------------------------------------------------------
+                         """))
+            # Choose
+            num = int(input("> "))
+            if num == 1:
+                image_dir = 'train'
+            elif num == 2:
+                image_dir = 'test'
+            elif num == 3:
+                image_dir = 'validation'
+            elif num == 0:
                 exit(1)
+
             print("Which class?")
+            print ("Class(es) inside {}: ".format(image_dir), os.listdir(os.path.join(dataset_dir, image_dir)))
             class_name = input("> ")
 
             download_dir = os.path.join(dataset_dir, image_dir, class_name)
@@ -199,6 +218,7 @@ if __name__ == '__main__':
                 k = cv2.waitKey(0) & 0xFF
                 if k == ord('d'):
                     cv2.destroyAllWindows()
+                    # Go to the first one
                     if index < len(os.listdir(download_dir)) - 2:
                         index += 1
                     show(class_name, download_dir, label_dir, index)
@@ -206,9 +226,13 @@ if __name__ == '__main__':
                         index = 0
                 elif k == ord('a'):
                     cv2.destroyAllWindows()
+                    # Go to the last one
                     if index > 0:
                         index -= 1
+                    elif index == 0:
+                        index = len(os.listdir(download_dir))-2
                     show(class_name, download_dir, label_dir, index)
+                
                 elif k == ord('w'):
                     cv2.destroyAllWindows()
                     break
