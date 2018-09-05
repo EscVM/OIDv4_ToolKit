@@ -18,11 +18,11 @@ Usage:
 
 from sys import exit
 from textwrap import dedent
-from modules.parser import *
-from modules.utils import *
-from modules.downloader import *
-from modules.show import *
-from modules.csv_downloader import *
+from oid.parser import *
+from oid.utils import *
+from oid.downloader import *
+from oid.show import *
+from oid.csv_downloader import *
 
 ROOT_DIR = ''
 DEFAULT_OID_DIR = os.path.join(ROOT_DIR, 'OID')
