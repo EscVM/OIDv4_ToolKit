@@ -1,6 +1,6 @@
 import os
 from tqdm import tqdm
-from modules.utils import images_options
+from oid.utils import images_options
 from multiprocessing.dummy import Pool as ThreadPool
 
 

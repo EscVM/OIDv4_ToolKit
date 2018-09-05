@@ -71,11 +71,11 @@ Example: `Polar_bear`.
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
 ## Download different classes in separated folders
-Firstly, the toolkit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes.
+Firstly, the toolkit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes. We'd recommend you to set `--threads` to increase download speed.
 
 Let's for example download Apples and Oranges from the validation set. In this case we have to use the following command.
   ```bash
-   python3 main.py download --classes Apple Orange --type_csv validation 
+   python3 main.py download --classes Apple Orange --type_csv validation --threads 50
    ```
 The algorith will take care to download all the necessary files and build the directory structure like this:
 
@@ -129,10 +129,6 @@ If you interupt the downloading script `ctrl+d` you can always restart it from t
 In the original dataset the coordinates of the bounding boxes are made in the following way:
 
 **XMin**, **XMax**, **YMin**, **YMax**: coordinates of the box, in normalized image coordinates. XMin is in [0,1], where 0 is the leftmost pixel, and 1 is the rightmost pixel in the image. Y coordinates go from the top pixel (0) to the bottom pixel (1).
-
-However, in order to accomodate a more intuitive representation and give the maximum flexibility, every `.txt` annotation is made like:
-
-`name_of_the_class    left    top     right     bottom`
 
 ### Optional Arguments
 The annotations of the dataset has been marked with a bunch of boolean values. This attributes are reported below:
