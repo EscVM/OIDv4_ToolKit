@@ -1,4 +1,5 @@
 import os
+from textwrap import dedent
 
 def images_options(df_val, args):
     '''
@@ -63,3 +64,52 @@ def progression_bar(toolbar_width, index):
     '''
     print(' ' * (toolbar_width + 10), end='\r')
     print("[{}{}] {}/{}".format('-' * index, ' ' * (toolbar_width - index), index, toolbar_width), end='\r')
+
+def show_classes(classes):
+    '''
+    Show the downloaded classes in the selected folder during visualization mode
+    '''
+    for n in classes:
+        print("- {}".format(n))
+    print("\n")
+
+def logo(command):
+    '''
+    Print the logo for the downloader and the visualizer when selected
+    '''
+    print("""
+
+		   ___   _____  ______            _    _    
+		 .'   `.|_   _||_   _ `.         | |  | |   
+		/  .-.  \ | |    | | `. \ _   __ | |__| |_  
+		| |   | | | |    | |  | |[ \ [  ]|____   _| 
+		\  `-'  /_| |_  _| |_.' / \ \/ /     _| |_  
+		 `.___.'|_____||______.'   \__/     |_____|
+
+	""")
+
+    if command == 'download':
+        print(dedent(""" 
+
+ ______                                 __                       __                
+|_   _ `.                              [  |                     |  ]               
+  | | `. \  .--.   _   _   __  _ .--.   | |  .--.   ,--.    .--.| | .---.  _ .--.  
+  | |  | |/ .'`\ \[ \ [ \ [  ][ `.-. |  | |/ .'`\ \`'_\ : / /'`\' |/ /__\\[ `/'`\] 
+ _| |_.' /| \__. | \ \/\ \/ /  | | | |  | || \__. |// | |,| \__/  || \__., | |     
+|______.'  '.__.'   \__/\__/  [___||__][___]'.__.' \'-;__/ '.__.;__]'.__.'[___]    
+                                                                                  
+"""))
+
+    if command == 'visualize':
+        print(""" 
+
+     ____   ____  _                         __    _                        
+    |_  _| |_  _|(_)                       [  |  (_)                       
+      \ \   / /  __   .--.  __   _   ,--.   | |  __   ____  .---.  _ .--.  
+       \ \ / /  [  | ( (`\][  | | | `'_\ :  | | [  | [_   ]/ /__\\[ `/'`\] 
+        \ ' /    | |  `'.'. | \_/ |,// | |, | |  | |  .' /_| \__., | |     
+         \_/    [___][\__) )'.__.'_/\'-;__/[___][___][_____]'.__.'[___]    
+                                                                                                                                                       
+""")
+
+

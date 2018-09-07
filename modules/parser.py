@@ -3,7 +3,6 @@ import argparse
 def parser_arguments():
     '''
     Manage the input from the terminal.
-
     :return: parser
     '''
     parser = argparse.ArgumentParser(description='Open Image Dataset Downloader')
@@ -40,5 +39,9 @@ def parser_arguments():
     parser.add_argument('--multiclasses', required=False, default='0', choices=['0', '1'],
                        metavar="0 (default) or 1",
                        help='Download different classes separately (0) or together (1)')
+
+    parser.add_argument('--n_threads', required=False, metavar="[default 20]",
+                       help='Num of the threads to use')
+
 
     return parser.parse_args()
