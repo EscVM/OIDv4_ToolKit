@@ -126,6 +126,9 @@ If you have already downloaded the different csv files you can simply put them i
 If you interupt the downloading script `ctrl+d` you can always restart it from the last image downloaded.
 
 ### Annotations
+
+<img align="right" src="images/rectangle.png">
+
 In the original dataset the coordinates of the bounding boxes are made in the following way:
 
 **XMin**, **XMax**, **YMin**, **YMax**: coordinates of the box, in normalized image coordinates. XMin is in [0,1], where 0 is the leftmost pixel, and 1 is the rightmost pixel in the image. Y coordinates go from the top pixel (0) to the bottom pixel (1).
