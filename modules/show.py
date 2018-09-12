@@ -22,9 +22,11 @@ def show(class_name, download_dir, label_dir, index):
     f = open(file_path, 'r')
 
     for line in f:
+        # each row in a file is class_name, XMin, YMix, XMax, YMax
         ax = line.split(' ')
-        cv2.rectangle(img, (int(float(ax[-4])), int(float(ax[-3]))),
-                      (int(float(ax[-2])),
-                       int(float(ax[-1]))), (0, 255, 0), 3)
+	    # opencv top left bottom right
+        cv2.rectangle(img, (int(float(ax[-2])), int(float(ax[-1]))),
+                      (int(float(ax[-4])),
+                       int(float(ax[-3]))), (0, 255, 0), 3)
 
     cv2.imshow(class_name, img)
