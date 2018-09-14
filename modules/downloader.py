@@ -28,7 +28,7 @@ def download(args, df_val, folder, dataset_dir, class_name, class_code, class_li
     else:
         class_name_list = class_name
     download_img(folder, dataset_dir, class_name_list, images_list, threads)
-    get_label(folder, dataset_dir, class_name, class_code, df_val, class_name_list)
+    get_label(folder, dataset_dir, class_name, class_code, df_val, class_name_list, args)
 
 
 def download_img(folder, dataset_dir, class_name, images_list, threads):
@@ -67,7 +67,7 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
         print('[INFO] All images already downloaded.')
 
 
-def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list):
+def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list, args):
     '''
     Make the label.txt files
     :param folder: trai, validation or test
@@ -78,42 +78,43 @@ def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list):
     :param class_list: list of the class if multiclasses is activated
     :return: None
     '''
-    print("[INFO] Creating labels for {} of {}.".format(class_name, folder))
+    if not args.noLabels:
+        print("[INFO] Creating labels for {} of {}.".format(class_name, folder))
 
-    image_dir = folder
-    if class_list is not None:
-        download_dir = os.path.join(dataset_dir, image_dir, class_list)
-        label_dir = os.path.join(dataset_dir, folder, class_list, 'Label')
-    else:
-        download_dir = os.path.join(dataset_dir, image_dir, class_name)
-        label_dir = os.path.join(dataset_dir, folder, class_name, 'Label')
+        image_dir = folder
+        if class_list is not None:
+            download_dir = os.path.join(dataset_dir, image_dir, class_list)
+            label_dir = os.path.join(dataset_dir, folder, class_list, 'Label')
+        else:
+            download_dir = os.path.join(dataset_dir, image_dir, class_name)
+            label_dir = os.path.join(dataset_dir, folder, class_name, 'Label')
 
-    downloaded_images_list = [f.split('.')[0] for f in os.listdir(download_dir) if f.endswith('.jpg')]
-    images_label_list = list(set(downloaded_images_list))
+        downloaded_images_list = [f.split('.')[0] for f in os.listdir(download_dir) if f.endswith('.jpg')]
+        images_label_list = list(set(downloaded_images_list))
 
-    for image in images_label_list:
-        try:
-            current_image_path = os.path.join(download_dir, image + '.jpg')
-            dataset_image = cv2.imread(current_image_path)
-            boxes = df_val[['XMin', 'XMax', 'YMin', 'YMax']][
-                (df_val.ImageID == image.split('.')[0]) & (df_val.LabelName == class_code)].values.tolist()
-            file_name = str(image.split('.')[0]) + '.txt'
-            file_path = os.path.join(label_dir, file_name)
-            if os.path.isfile(file_path):
-                f = open(file_path, 'a')
-            else:
-                f = open(file_path, 'w')
+        for image in images_label_list:
+            try:
+                current_image_path = os.path.join(download_dir, image + '.jpg')
+                dataset_image = cv2.imread(current_image_path)
+                boxes = df_val[['XMin', 'XMax', 'YMin', 'YMax']][
+                    (df_val.ImageID == image.split('.')[0]) & (df_val.LabelName == class_code)].values.tolist()
+                file_name = str(image.split('.')[0]) + '.txt'
+                file_path = os.path.join(label_dir, file_name)
+                if os.path.isfile(file_path):
+                    f = open(file_path, 'a')
+                else:
+                    f = open(file_path, 'w')
 
-            for box in boxes:
-                box[0] *= int(dataset_image.shape[1])
-                box[1] *= int(dataset_image.shape[1])
-                box[2] *= int(dataset_image.shape[0])
-                box[3] *= int(dataset_image.shape[0])
+                for box in boxes:
+                    box[0] *= int(dataset_image.shape[1])
+                    box[1] *= int(dataset_image.shape[1])
+                    box[2] *= int(dataset_image.shape[0])
+                    box[3] *= int(dataset_image.shape[0])
 
-                # each row in a file is name of the class_name, XMin, YMix, XMax, YMax (left top right bottom)
-                print(class_name, box[0], box[2], box[1], box[3], file=f)
+                    # each row in a file is name of the class_name, XMin, YMix, XMax, YMax (left top right bottom)
+                    print(class_name, box[0], box[2], box[1], box[3], file=f)
 
-        except Exception as e:
-            print(str(e))
+            except Exception as e:
+                print(str(e))
 
-    print('[INFO] Labels creation completed.')
+        print('[INFO] Labels creation completed.')

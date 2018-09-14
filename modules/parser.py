@@ -43,5 +43,8 @@ def parser_arguments():
     parser.add_argument('--n_threads', required=False, metavar="[default 20]",
                        help='Num of the threads to use')
 
+    parser.add_argument('--noLabels', required=False, action='store_true',
+                       help='No labels creations')
+
 
     return parser.parse_args()
