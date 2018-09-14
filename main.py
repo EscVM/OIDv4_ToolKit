@@ -12,8 +12,6 @@ Licensed under the MIT License (see LICENSE for details)
 ------------------------------------------------------------
 Usage:
 """
-
-
 from sys import exit
 from textwrap import dedent
 from modules.parser import *
@@ -21,6 +19,8 @@ from modules.utils import *
 from modules.downloader import *
 from modules.show import *
 from modules.csv_downloader import *
+
+
 
 ROOT_DIR = ''
 DEFAULT_OID_DIR = os.path.join(ROOT_DIR, 'OID')
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     name_file_class = 'class-descriptions-boxable.csv'
     CLASSES_CSV = os.path.join(csv_dir, name_file_class)
 
-    if args.command == 'download':
+    if args.command == 'downloader':
 	
         logo(args.command)
 
@@ -55,11 +55,16 @@ if __name__ == '__main__':
         folder = ['train', 'validation', 'test']
         file_list = ['train-annotations-bbox.csv', 'validation-annotations-bbox.csv', 'test-annotations-bbox.csv']
 
-        args.classes = [arg.replace('_', ' ') for arg in args.classes]
+        if args.classes[0].endswith('.txt'):
+                with open(args.classes[0]) as f:
+                    args.classes = f.readlines()
+                args.classes = [x.strip() for x in args.classes]
+        else:
+                args.classes = [arg.replace('_', ' ') for arg in args.classes]
 
         if args.multiclasses == '0':
 
-            mkdirs(dataset_dir, csv_dir, args.classes)
+            mkdirs(dataset_dir, csv_dir, args.classes, args.type_csv)
 
             for classes in args.classes:
 
@@ -157,7 +162,7 @@ if __name__ == '__main__':
                             download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_threads))
 
 
-    elif args.command == 'visualize':
+    elif args.command == 'visualizer':
 
         logo(args.command)
 

@@ -64,18 +64,19 @@ or in the following way to get more information
 The ToolKit permit the download of your dataset in the folder you want (`Dataset`as default). The folder can be imposed with the argument 
 `--Dataset` so you can make different dataset with different options inside. 
 
-**Note**: for classes that are composed by different
-words please use the `_` character instead of the space. 
-Example: `Polar_bear`.
-
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
 ## Download different classes in separated folders
-Firstly, the ToolKit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes.
+Firstly, the ToolKit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes or 
+the path to the file.txt (`--classes path/to/file.txt`) that contains the list of all classes one for each lines (classes.txt uploaded as example).
+
+**Note**: for classes that are composed by different
+words please use the `_` character instead of the space (only for the inline use of the argument `--classes`). 
+Example: `Polar_bear`.
 
 Let's for example download Apples and Oranges from the validation set. In this case we have to use the following command.
   ```bash
-   python3 main.py download --classes Apple Orange --type_csv validation 
+   python3 main.py downloader --classes Apple Orange --type_csv validation 
    ```
 The algorith will take care to download all the necessary files and build the directory structure like this:
 
@@ -125,6 +126,16 @@ If you have already downloaded the different csv files you can simply put them i
 
 If you interupt the downloading script `ctrl+d` you can always restart it from the last image downloaded.
 
+## Download multiple classes in a common folder
+This option allows to download more classes, but in a common folder. Also the related notations are mixed together with
+ the already explained format (the first element is always the name of the single class). In this way, with a simple 
+ dictionary it's easy to parse the generated label to get the desired format.
+
+Again if we want to download Apple and Oranges, but in a common folder
+  ```bash
+   python3 main.py downloader --classes Apple Orange --type_csv validation --multiclasses 1
+   ```
+   
 ### Annotations
 
 <img align="right" src="images/rectangle.png">
@@ -137,6 +148,8 @@ However, in order to accomodate a more intuitive representation and give the max
 
 `name_of_the_class    left    top     right     bottom`
 
+If you don't need the labels creation use `--noLabels`.
+
 ### Optional Arguments
 The annotations of the dataset has been marked with a bunch of boolean values. This attributes are reported below:
 - **IsOccluded**: Indicates that the object is occluded by another object in the image.
@@ -144,33 +157,24 @@ The annotations of the dataset has been marked with a bunch of boolean values. T
 - **IsGroupOf**: Indicates that the box spans a group of objects (e.g., a bed of flowers or a crowd of people). We asked annotators to use this tag for cases with more than 5 instances which are heavily occluding each other and are physically touching.
 - **IsDepiction**: Indicates that the object is a depiction (e.g., a cartoon or drawing of the object, not a real physical instance).
 - **IsInside**: Indicates a picture taken from the inside of the object (e.g., a car interior or inside of a building).
-- **n_threads**: Thanks to [Denis Zuenko](https://github.com/zuenko) you can select how many threads you want to use. The ToolKit will take care for you to download multiple images in parallel, considerably speeding up the downloading process.
+- **n_threads**: Select how many threads you want to use. The ToolKit will take care for you to download multiple images in parallel, considerably speeding up the downloading process.
 
 Naturally, the ToolKit provides the same options as paramenters in order to filter the downloaded images.
 For example, with:
   ```bash
-   python3 main.py download --classes Apple Orange --type_csv validation --image_IsGroupOf 0
+   python3 main.py downloader --classes Apple Orange --type_csv validation --image_IsGroupOf 0
    ```
 only images without group annotations are downloaded.
 
-## Download multiple classes in a common folder
-This option allows to download more classes, but in a common folder. Also the related notations are mixed together with
- the already explained format (the first element is always the name of the single class). In this way, with a simple 
- dictionary it's easy to parse the generated label to get the desired format.
-
-Again if we want to download Apple and Oranges, but in a common folder
-  ```bash
-   python3 main.py download --classes Apple Orange --type_csv validation --multiclasses 1
-   ```
 # Use the ToolKit to visualize the labeled images
 The ToolKit is useful also for visualize the downloaded images with the respective labels.
 ```bash
-   python3 main.py visualize 
+   python3 main.py visualizer 
    ```
   In this way the default `Dataset` folder will be pointed to search the images and labels automatically. To point
   another folder it's possible to use `--Dataset` optional argument.
 ```bash
-   python3 main.py visualize --Dataset desired_folder 
+   python3 main.py visualizer --Dataset desired_folder 
    ```
 Then the system will ask you which folder to visualize (train, validation or test) and the desired class.
 Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore all the images. Follow the menu for all the other options.
@@ -180,7 +184,6 @@ Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore
 </p>
 
 # Community Contributions
-- [ivanovean](https://github.com/ivanovean) has helped to fix downloads with classes composed by multiple words
 - [Denis Zuenko](https://github.com/zuenko) has added multithreading to the ToolKit and is currently working on the generalization and speeding up process of the labels creation
 
 # Citation
