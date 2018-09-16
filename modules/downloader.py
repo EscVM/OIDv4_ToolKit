@@ -115,6 +115,6 @@ def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list, a
                     print(class_name, box[0], box[2], box[1], box[3], file=f)
 
             except Exception as e:
-                print(str(e))
+                pass
 
         print('[INFO] Labels creation completed.')
