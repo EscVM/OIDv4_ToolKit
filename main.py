@@ -122,9 +122,9 @@ if __name__ == '__main__':
             error_csv(name_file_class, csv_dir)
             df_classes = pd.read_csv(CLASSES_CSV, header=None)
 
-            class_code_list = df_classes.loc[df_classes[1].isin(class_list)][0].values
-
-            class_dict = dict(zip(class_list, class_code_list))
+            class_dict = {}
+            for class_name in class_list:
+                class_dict[class_name] = df_classes.loc[df_classes[1] == class_name].values[0][0]
 
             for class_name in class_list:
 

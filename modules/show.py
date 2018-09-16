@@ -4,7 +4,6 @@ import os
 def show(class_name, download_dir, label_dir, index):
     '''
     Show the images with the labeled boxes.
-
     :param class_name: self explanatory
     :param download_dir: folder that contains the images
     :param label_dir: folder that contains the labels
