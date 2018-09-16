@@ -185,6 +185,7 @@ Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore
 
 # Community Contributions
 - [Denis Zuenko](https://github.com/zuenko) has added multithreading to the ToolKit and is currently working on the generalization and speeding up process of the labels creation
+- [Skylion007 ](https://github.com/Skylion007) has improved label creation reducing the runtime from O(nm) to O(n). This massively speeds up label generation
 
 # Citation
 Use this bibtex if you want to cite this repository:
