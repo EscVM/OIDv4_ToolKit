@@ -117,7 +117,7 @@ if __name__ == '__main__':
             class_list = args.classes
             print("[INFO] Downloading {} together.".format(class_list))
             multiclass_name = ['_'.join(class_list)]
-            mkdirs(dataset_dir, csv_dir, multiclass_name)
+            mkdirs(dataset_dir, csv_dir, multiclass_name, args.type_csv)
 
             error_csv(name_file_class, csv_dir)
             df_classes = pd.read_csv(CLASSES_CSV, header=None)
