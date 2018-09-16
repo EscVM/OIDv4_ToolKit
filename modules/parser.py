@@ -8,8 +8,8 @@ def parser_arguments():
     parser = argparse.ArgumentParser(description='Open Image Dataset Downloader')
 
     parser.add_argument("command",
-                        metavar="<command> 'download' or 'visualize'",
-                        help="'download' or 'visualize'")
+                        metavar="<command> 'downloader' or 'visualizer'",
+                        help="'downloader' or 'visualizer'")
     parser.add_argument('--Dataset', required=False,
                         metavar="/path/to/OID/csv/",
                         help='Directory of the OID dataset folder')
