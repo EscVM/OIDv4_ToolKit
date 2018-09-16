@@ -92,12 +92,12 @@ def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list, a
         downloaded_images_list = [f.split('.')[0] for f in os.listdir(download_dir) if f.endswith('.jpg')]
         images_label_list = list(set(downloaded_images_list))
 
+        groups = df_val[(df_val.LabelName == class_code)].groupby(df_val.ImageID)
         for image in images_label_list:
             try:
                 current_image_path = os.path.join(download_dir, image + '.jpg')
                 dataset_image = cv2.imread(current_image_path)
-                boxes = df_val[['XMin', 'XMax', 'YMin', 'YMax']][
-                    (df_val.ImageID == image.split('.')[0]) & (df_val.LabelName == class_code)].values.tolist()
+                boxes = groups.get_group(image.split('.')[0])[['XMin', 'XMax', 'YMin', 'YMax']].values.tolist()
                 file_name = str(image.split('.')[0]) + '.txt'
                 file_path = os.path.join(label_dir, file_name)
                 if os.path.isfile(file_path):
