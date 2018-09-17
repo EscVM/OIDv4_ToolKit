@@ -210,7 +210,7 @@ if __name__ == '__main__':
                 --------------------------------------------------------
                 """))
 
-            show(class_name, download_dir, label_dir, index)
+            show(class_name, download_dir, label_dir,len(os.listdir(download_dir))-1, index)
 
             while True:
 
@@ -222,12 +222,12 @@ if __name__ == '__main__':
                     cv2.destroyAllWindows()
                     if index < len(os.listdir(download_dir)) - 2:
                         index += 1
-                    show(class_name, download_dir, label_dir, index)
+                    show(class_name, download_dir, label_dir,len(os.listdir(download_dir))-1, index)
                 elif k == ord('a'):
                     cv2.destroyAllWindows()
                     if index > 0:
                         index -= 1
-                    show(class_name, download_dir, label_dir, index)
+                    show(class_name, download_dir, label_dir,len(os.listdir(download_dir))-1, index)
                 elif k == ord('e'):
                     cv2.destroyAllWindows()
                     break
