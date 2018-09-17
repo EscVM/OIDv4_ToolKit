@@ -5,7 +5,6 @@ import numpy as np
 class_list = []
 color_dic = dict()
 flag = 0
-window_name = 'Visualizer'
 
 def color_gen():
     '''
@@ -21,7 +20,7 @@ def color_gen():
         color = tuple(255 * np.random.rand(3))
     return color
 
-def show(class_name, download_dir, label_dir, index):
+def show(class_name, download_dir, label_dir,total_images, index):
     '''
     Show the images with the labeled boxes.
 
@@ -32,7 +31,7 @@ def show(class_name, download_dir, label_dir, index):
     :return: None
     '''
  
-    global class_list, color_dic, window_name
+    global class_list, color_dic
 
     if not os.listdir(download_dir)[index].endswith('.jpg'):
         index += 2
@@ -43,8 +42,10 @@ def show(class_name, download_dir, label_dir, index):
     file_path = os.path.join(label_dir, file_name)
     f = open(file_path, 'r')
 
+    window_name = "Visualizer: {}/{}".format(index, total_images)
+
     cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
-    width = 600
+    width = 500
     height = int((img.shape[0] * width) / img.shape[1])
     cv2.resizeWindow(window_name, width, height)
 
