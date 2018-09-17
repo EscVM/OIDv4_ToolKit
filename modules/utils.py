@@ -71,7 +71,25 @@ def progression_bar(total_images, index):
     :param index: self explanatory
     :return: None
     '''
-    rows, columns = os.popen('stty size', 'r').read().split()
+    # for windows os
+    if os.name == 'nt':
+        from ctypes import windll, create_string_buffer
+
+        h = windll.kernel32.GetStdHandle(-12)
+        csbi = create_string_buffer(22)
+        res = windll.kernel32.GetConsoleScreenBufferInfo(h, csbi)
+
+        if res:
+            import struct
+            (bufx, bufy, curx, cury, wattr,
+             left, top, right, bottom, maxx, maxy) = struct.unpack("hhhhHhhhhhh", csbi.raw)
+            columns = right - left + 1
+            rows = bottom - top + 1
+        else:
+            columns, rows = 80, 25 # can't determine actual size - return default values
+    # for linux/gnu os
+    else:
+        rows, columns = os.popen('stty size', 'r').read().split()
     toolbar_width = int(columns) - 10
     image_index = index
     index = int(index / total_images * toolbar_width)
@@ -122,4 +140,3 @@ def logo(command):
                   \/  |_(___/ \____|\_||_|_|_(_____)____)_|    
                                                                                                                                                                                                     
 """)
-
