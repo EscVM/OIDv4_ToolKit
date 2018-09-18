@@ -34,9 +34,9 @@ def error_csv(file, csv_dir):
         if ans.lower() == 'y':
             folder = str(os.path.basename(file)).split('-')[0]
             if folder != 'class':
-                FILE_URL = os.path.join(OID_URL, folder, file)
+                FILE_URL = str(OID_URL + folder + '/' + file)
             else:
-                FILE_URL = os.path.join(OID_URL, file)
+                FILE_URL = str(OID_URL + file)
 
             FILE_PATH = os.path.join(csv_dir, file)
             save(FILE_URL, FILE_PATH)
