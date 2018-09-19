@@ -2,7 +2,7 @@ import os
 import cv2
 from tqdm import tqdm
 from modules.utils import images_options
-from multiprocessing.dummy import Pool as ThreadPool 
+from multiprocessing.dummy import Pool as ThreadPool
 
 def download(args, df_val, folder, dataset_dir, class_name, class_code, class_list=None, threads = 20):
     '''
@@ -23,6 +23,13 @@ def download(args, df_val, folder, dataset_dir, class_name, class_code, class_li
 
     images_list = df_val_images['ImageID'][df_val_images.LabelName == class_code].values
     images_list = set(images_list)
+    print("[INFO] Found {} online images for {}.".format(len(images_list), folder))
+
+    if args.limit is not None:
+        import itertools
+        print('[INFO] Limiting to {} images.'.format(args.limit))
+        images_list = set(itertools.islice(images_list, args.limit))
+
     if class_list is not None:
         class_name_list = '_'.join(class_list)
     else:
@@ -41,15 +48,13 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
     :param threads: number of threads
     :return: None
     '''
-    print("[INFO] Found {} online images for {}.".format(len(images_list), folder))
-
     image_dir = folder
     download_dir = os.path.join(dataset_dir, image_dir, class_name)
     downloaded_images_list = [f.split('.')[0] for f in os.listdir(download_dir)]
     images_list = list(set(images_list) - set(downloaded_images_list))
 
     pool = ThreadPool(threads)
-    
+
     if len(images_list) > 0:
         print("[INFO] Download of {} images in {}.".format(len(images_list), folder))
         commands = []
@@ -57,12 +62,12 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
             path = image_dir + '/' + str(image) + '.jpg ' + '"' + download_dir + '"'
             command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path
             commands.append(command)
-        
+
         list(tqdm(pool.imap(os.system, commands), total = len(commands) ))
 
         print('[INFO] Done!')
-        pool.close() 
-        pool.join() 
+        pool.close()
+        pool.join()
     else:
         print('[INFO] All images already downloaded.')
 
