@@ -186,7 +186,8 @@ Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore
 
 # Community Contributions
 - [Denis Zuenko](https://github.com/zuenko) has added multithreading to the ToolKit and is currently working on the generalization and speeding up process of the labels creation
-- [Skylion007 ](https://github.com/Skylion007) has improved labels creation reducing the runtime from O(nm) to O(n). That massively speeds up label generation
+- [Skylion007](https://github.com/Skylion007) has improved labels creation reducing the runtime from O(nm) to O(n). That massively speeds up label generation
+- [Alex March](https://github.com/hosaka) has added the limit option to the ToolKit in order to download only a maximum number of images of a certain class
 
 # Citation
 Use this bibtex if you want to cite this repository:
