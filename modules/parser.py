@@ -47,7 +47,7 @@ def parser_arguments():
                        help='No labels creations')
 
     parser.add_argument('--limit', required=False, type=int, default=None,
-                        metavar="all (default) or integer limit",
+                        metavar="integer number",
                         help='Optional limit on number of images to download')
 
     return parser.parse_args()
