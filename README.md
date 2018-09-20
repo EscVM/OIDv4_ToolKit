@@ -11,7 +11,7 @@ In particular, with this practical ToolKit written in Python3 we give you the fo
 * download a single class or multiple classes with the desired [attributes](https://storage.googleapis.com/openimages/web/download.html)
 * use the practical visualizer to inspect the donwloaded classes
 
-The code is quite documented and designed to be easy to extend and improve. 
+The code is quite documented and designed to be easy to extend and improve.
 Me and [Angelo](https://github.com/keldrom) are pleased if our little bit of code can help you with your project and research. Enjoy ;)
 
 ![Snippet of the OIDv4 available classes](images/classes.png)
@@ -30,7 +30,7 @@ As it's possible to observe from the previous table we can have access to images
 The ToolKit provides a way to select only a specific group where to search.
 It's important to underline that some annotations has been done as a group. It means that a single bounding box groups more than one istance. As mentioned by the creator of the dataset:
 - **IsGroupOf**: Indicates that the box spans a group of objects (e.g., a bed of flowers or a crowd of people). We asked annotators to use this tag for cases with more than 5 instances which are heavily occluding each other and are physically touching.
-That's again an option of the ToolKit that can be used to only grasp the desired images. 
+That's again an option of the ToolKit that can be used to only grasp the desired images.
 
 Finally, it's interesting to notice that not all annotations has been produced by humans, but the creator also exploited an enhanced version of the method shown here reported [1](#reference)
 
@@ -59,30 +59,30 @@ or in the following way to get more information
    ```bash
    python3 main.py -h
    ```
-   
+
 # Use the ToolKit to download
-The ToolKit permit the download of your dataset in the folder you want (`Dataset`as default). The folder can be imposed with the argument 
-`--Dataset` so you can make different dataset with different options inside. 
+The ToolKit permit the download of your dataset in the folder you want (`Dataset`as default). The folder can be imposed with the argument
+`--Dataset` so you can make different dataset with different options inside.
 
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
 ## Download different classes in separated folders
-Firstly, the ToolKit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes or 
+Firstly, the ToolKit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes or
 the path to the file.txt (`--classes path/to/file.txt`) that contains the list of all classes one for each lines (classes.txt uploaded as example).
 
 **Note**: for classes that are composed by different
-words please use the `_` character instead of the space (only for the inline use of the argument `--classes`). 
+words please use the `_` character instead of the space (only for the inline use of the argument `--classes`).
 Example: `Polar_bear`.
 
 Let's for example download Apples and Oranges from the validation set. In this case we have to use the following command.
   ```bash
-   python3 main.py downloader --classes Apple Orange --type_csv validation 
+   python3 main.py downloader --classes Apple Orange --type_csv validation
    ```
 The algorith will take care to download all the necessary files and build the directory structure like this:
 
 ```
-main_folder 
-│   main.py   
+main_folder
+│   main.py
 │
 └───OID
     │   file011.txt
@@ -91,15 +91,15 @@ main_folder
     └───csv_folder
     |    │   class-descriptions-boxable.csv
     |    │   validation-annotations-bbox.csv
-    | 
+    |
     └───Dataset
-        |   
+        |
         └─── test
-        | 
+        |
         └─── train
-        | 
+        |
         └─── validation
-             | 
+             |
              └───Apple
              |     |
              |     |0fdea8a716155a8e.jpg
@@ -110,7 +110,7 @@ main_folder
              |            |0fdea8a716155a8e.txt
              |            |2fe4f21e409f0a56.txt
              |            |...
-             | 
+             |
              └───Orange
                    |
                    |0b6f22bf3b586889.jpg
@@ -128,14 +128,14 @@ If you interupt the downloading script `ctrl+d` you can always restart it from t
 
 ## Download multiple classes in a common folder
 This option allows to download more classes, but in a common folder. Also the related notations are mixed together with
- the already explained format (the first element is always the name of the single class). In this way, with a simple 
+ the already explained format (the first element is always the name of the single class). In this way, with a simple
  dictionary it's easy to parse the generated label to get the desired format.
 
 Again if we want to download Apple and Oranges, but in a common folder
   ```bash
    python3 main.py downloader --classes Apple Orange --type_csv validation --multiclasses 1
    ```
-   
+
 ### Annotations
 
 <img align="right" src="images/rectangle.png">
@@ -158,6 +158,7 @@ The annotations of the dataset has been marked with a bunch of boolean values. T
 - **IsDepiction**: Indicates that the object is a depiction (e.g., a cartoon or drawing of the object, not a real physical instance).
 - **IsInside**: Indicates a picture taken from the inside of the object (e.g., a car interior or inside of a building).
 - **n_threads**: Select how many threads you want to use. The ToolKit will take care for you to download multiple images in parallel, considerably speeding up the downloading process.
+- **limit**: Limit the number of images being downloaded. Useful if you want to restrict the size of your dataset.
 
 Naturally, the ToolKit provides the same options as paramenters in order to filter the downloaded images.
 For example, with:
@@ -169,12 +170,12 @@ only images without group annotations are downloaded.
 # Use the ToolKit to visualize the labeled images
 The ToolKit is useful also for visualize the downloaded images with the respective labels.
 ```bash
-   python3 main.py visualizer 
+   python3 main.py visualizer
    ```
   In this way the default `Dataset` folder will be pointed to search the images and labels automatically. To point
   another folder it's possible to use `--Dataset` optional argument.
 ```bash
-   python3 main.py visualizer --Dataset desired_folder 
+   python3 main.py visualizer --Dataset desired_folder
    ```
 Then the system will ask you which folder to visualize (train, validation or test) and the desired class.
 Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore all the images. Follow the menu for all the other options.

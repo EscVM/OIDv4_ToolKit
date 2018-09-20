@@ -34,7 +34,7 @@ def parser_arguments():
                         help='Optional characteristic of the images. Indicates that the object is a depiction.')
     parser.add_argument('--image_IsInside', required=False, choices=['0', '1'],
                         metavar="1 or 0",
-                        help='Optional characteristic of the images.  Indicates a picture taken from the inside of the object.')
+                        help='Optional characteristic of the images. Indicates a picture taken from the inside of the object.')
 
     parser.add_argument('--multiclasses', required=False, default='0', choices=['0', '1'],
                        metavar="0 (default) or 1",
@@ -46,5 +46,8 @@ def parser_arguments():
     parser.add_argument('--noLabels', required=False, action='store_true',
                        help='No labels creations')
 
+    parser.add_argument('--limit', required=False, type=int, default=None,
+                        metavar="integer number",
+                        help='Optional limit on number of images to download')
 
     return parser.parse_args()
