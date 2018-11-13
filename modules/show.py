@@ -1,5 +1,6 @@
 import cv2
 import os
+import re
 import numpy as np
 
 class_list = []
@@ -51,9 +52,10 @@ def show(class_name, download_dir, label_dir,total_images, index):
 
     for line in f:        
         # each row in a file is class_name, XMin, YMix, XMax, YMax
-        ax = line.split(' ')
+        match_class_name = re.compile('^[a-zA-Z]+(\s+[a-zA-Z]+)*').match(line)
+        class_name = line[:match_class_name.span()[1]]
+        ax = line[match_class_name.span()[1]:].lstrip().rstrip().split(' ')
 	# opencv top left bottom right
-        class_name = str(ax[0])
 
         if class_name not in class_list:
             class_list.append(class_name)
@@ -62,7 +64,7 @@ def show(class_name, download_dir, label_dir,total_images, index):
 
         font = cv2.FONT_HERSHEY_SIMPLEX
         r ,g, b = color_dic[class_name]
-        cv2.putText(img,class_name,(int(float(ax[1]))+5,int(float(ax[2]))-7), font, 0.8,(b, g, r), 2,cv2.LINE_AA)
+        cv2.putText(img,class_name,(int(float(ax[0]))+5,int(float(ax[1]))-7), font, 0.8,(b, g, r), 2,cv2.LINE_AA)
         cv2.rectangle(img, (int(float(ax[-2])), int(float(ax[-1]))),
                       (int(float(ax[-4])),
                        int(float(ax[-3]))), (b, g, r), 3)
