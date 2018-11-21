@@ -39,7 +39,7 @@ if __name__ == '__main__':
     name_file_class = 'class-descriptions-boxable.csv'
     CLASSES_CSV = os.path.join(csv_dir, name_file_class)
 
-    if args.command == 'downloader':
+    if args.command == 'download':
 	
         logo(args.command)
 
