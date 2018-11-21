@@ -162,7 +162,7 @@ if __name__ == '__main__':
                             download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_threads))
 
 
-    elif args.command == 'visualizer':
+    elif args.command == 'visualize':
 
         logo(args.command)
 
