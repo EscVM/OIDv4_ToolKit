@@ -76,7 +76,7 @@ Example: `Polar_bear`.
 
 Let's for example download Apples and Oranges from the validation set. In this case we have to use the following command.
   ```bash
-   python3 main.py download --classes Apple Orange --type_csv validation
+   python3 main.py downloader --classes Apple Orange --type_csv validation
    ```
 The algorith will take care to download all the necessary files and build the directory structure like this:
 
