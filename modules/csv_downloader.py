@@ -3,6 +3,7 @@ import sys
 import time
 import urllib.request
 import pandas as pd
+import numpy as np
 
 OID_URL = 'https://storage.googleapis.com/openimages/2018_04/'
 
@@ -14,9 +15,21 @@ def TTV(csv_dir, name_file):
     :param name_file: name of the correct .csv file
     :return: None
     '''
+    types = {
+        'Confidence':  np.int8,
+        'XMin':        np.float32,
+        'XMax':        np.float32,
+        'YMin':        np.float32,
+        'YMax':        np.float32,
+        'IsOccluded':  np.int8,
+        'IsTruncated': np.int8,
+        'IsGroupOf':   np.int8,
+        'IsDepiction': np.int8,
+        'IsInside':    np.int8 }
+
     CSV = os.path.join(csv_dir, name_file)
     error_csv(name_file, csv_dir)
-    df_val = pd.read_csv(CSV)
+    df_val = pd.read_csv(CSV, dtype=types)
     return df_val
 
 def error_csv(file, csv_dir):
