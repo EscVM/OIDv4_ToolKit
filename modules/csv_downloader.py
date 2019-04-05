@@ -4,6 +4,8 @@ import time
 import urllib.request
 import pandas as pd
 
+from modules.utils import bcolors as bc
+
 OID_URL = 'https://storage.googleapis.com/openimages/2018_04/'
 
 def TTV(csv_dir, name_file):
@@ -28,8 +30,8 @@ def error_csv(file, csv_dir):
     :return: None
     '''
     if not os.path.isfile(os.path.join(csv_dir, file)):
-        print("[ERROR] Missing the {} file.".format(os.path.basename(file)))
-        ans = input("[DOWNLOAD] Do you want to download the missing file? [Y/n] ")
+        print(bc.FAIL + "Missing the {} file.".format(os.path.basename(file)) + bc.ENDC)
+        ans = input(bc.OKBLUE + "Do you want to download the missing file? [Y/n] " + bc.ENDC)
 
         if ans.lower() == 'y':
             folder = str(os.path.basename(file)).split('-')[0]
@@ -40,7 +42,7 @@ def error_csv(file, csv_dir):
 
             FILE_PATH = os.path.join(csv_dir, file)
             save(FILE_URL, FILE_PATH)
-            print("\n[DOWNLOAD] File {} downloaded into {}.".format(file, FILE_PATH))
+            print('\n' + bc.OKBLUE + "File {} downloaded into {}.".format(file, FILE_PATH) + bc.ENDC)
 
         else:
             exit(1)

@@ -184,6 +184,33 @@ Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore
   <img width="540" height="303" src="images/visualizer_example.gif">
 </p>
 
+# Download images from Image-Level Labels Dataset
+The Toolkit is now able to acess also to the huge dataset without bounding boxes. This dataset is formed by 19,995 classes and it's already divided into train, validation and test. The command used for the download from this dataset is ```downloader_ill``` (Downloader of Image-Level Labels) and requires the argument ```--sub```. This argument selects the sub-dataset between human-verified labels ```h``` (5,655,108 images) and machine-generated labels ```m``` (8,853,429 images). An example of command is:
+```bash
+python3 main.py downloader_ill --sub m --classes Orange --type_csv train --limit 30
+```
+The previously explained commands ```Dataset```, ```multiclasses```, ```n_threads``` and ```limit``` are available.
+The Toolkit automatically will put the dataset and the csv folder in specific folders that are renamed with a `_nl` at the end. 
+# Commands sum-up
+
+|              | downloader | visualizer | downloader_ill |                                                  |
+|-------------:|:----------:|:----------:|:--------------:|--------------------------------------------------|
+|      Dataset |      R     |      O     |        R       | Dataset folder name                              |
+|      classes |      R     |            |        R       | Considered classes                               |
+|     type_csv |      R     |            |        R       | Train, test or validation dataset                |
+| multiclasses |      O     |            |        O       | Download classes toghether                       |
+|     noLabels |      O     |            |                | Don't create labels                              |
+|   IsOccluded |      O     |            |                | Consider or not this filter                      |
+|  IsTruncated |      O     |            |                | Consider or not this filter                      |
+|    IsGroupOf |      O     |            |                | Consider or not this filter                      |
+|  IsDepiction |      O     |            |                | Consider or not this filter                      |
+|     IsInside |      O     |            |                | Consider or not this filter                      |
+|    n_threads |      O     |            |        O       | Indicates the maximum threads number             |
+|        limit |      O     |            |        O       | Max number of images to download                 |
+|          sub |            |            |        R       | Human-verified or Machine-generated images (h/m) |
+
+R = required, O = optional
+
 # Community Contributions
 - [Denis Zuenko](https://github.com/zuenko) has added multithreading to the ToolKit and is currently working on the generalization and speeding up process of the labels creation
 - [Skylion007](https://github.com/Skylion007) has improved labels creation reducing the runtime from O(nm) to O(n). That massively speeds up label generation

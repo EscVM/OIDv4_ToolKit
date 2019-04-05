@@ -46,7 +46,10 @@ def mkdirs(Dataset_folder, csv_folder, classes, type_csv):
     
     if not type_csv == 'all':
         for class_name in classes:
-            folder = os.path.join(Dataset_folder, type_csv, class_name, 'Label')
+            if not Dataset_folder.endswith('_nl'):
+                folder = os.path.join(Dataset_folder, type_csv, class_name, 'Label')
+            else:
+                folder = os.path.join(Dataset_folder, type_csv, class_name)
             if not os.path.exists(folder):
                 os.makedirs(folder)
             filelist = [f for f in os.listdir(folder) if f.endswith(".txt")]
@@ -56,12 +59,18 @@ def mkdirs(Dataset_folder, csv_folder, classes, type_csv):
     else:
         for directory in directory_list:
             for class_name in classes:
-                folder = os.path.join(Dataset_folder, directory, class_name, 'Label')
+                if not Dataset_folder.endswith('_nl'):
+                    folder = os.path.join(Dataset_folder, directory, class_name, 'Label')
+                else:
+                    folder = os.path.join(Dataset_folder, directory, class_name, 'Label')
                 if not os.path.exists(folder):
                     os.makedirs(folder)
                 filelist = [f for f in os.listdir(folder) if f.endswith(".txt")]
                 for f in filelist:
                     os.remove(os.path.join(folder, f))
+
+    if not os.path.exists(csv_folder):
+        os.makedirs(csv_folder)
 
 def progression_bar(total_images, index):
     '''
@@ -110,17 +119,19 @@ def logo(command):
     '''
     Print the logo for the downloader and the visualizer when selected
     '''
-    print("""
+    bc = bcolors
+
+    print(bc.OKGREEN + """
 		   ___   _____  ______            _    _    
 		 .'   `.|_   _||_   _ `.         | |  | |   
 		/  .-.  \ | |    | | `. \ _   __ | |__| |_  
 		| |   | | | |    | |  | |[ \ [  ]|____   _| 
 		\  `-'  /_| |_  _| |_.' / \ \/ /     _| |_  
 		 `.___.'|_____||______.'   \__/     |_____|
-	""")
+	""" + bc.ENDC)
 
     if command == 'downloader':
-        print('''
+        print(bc.OKGREEN + '''
              _____                    _                 _             
             (____ \                  | |               | |            
              _   \ \ ___  _ _ _ ____ | | ___   ____  _ | | ____  ____ 
@@ -128,15 +139,39 @@ def logo(command):
             | |__/ / |_| | | | | | | | | |_| ( ( | ( (_| ( (/ /| |    
             |_____/ \___/ \____|_| |_|_|\___/ \_||_|\____|\____)_|    
                                                           
-        ''')
+        ''' + bc.ENDC)
 
     if command == 'visualizer':
-        print(""" 
-                _    _ _                  _ _                  
-               | |  | (_)                | (_)                 
-               | |  | |_  ___ _   _  ____| |_ _____ ____  ____ 
-                \ \/ /| |/___) | | |/ _  | | (___  ) _  )/ ___)
-                 \  / | |___ | |_| ( ( | | | |/ __( (/ /| |    
-                  \/  |_(___/ \____|\_||_|_|_(_____)____)_|    
+        print(bc.OKGREEN + """ 
+            _    _ _                  _ _                  
+           | |  | (_)                | (_)                 
+           | |  | |_  ___ _   _  ____| |_ _____ ____  ____ 
+            \ \/ /| |/___) | | |/ _  | | (___  ) _  )/ ___)
+             \  / | |___ | |_| ( ( | | | |/ __( (/ /| |    
+              \/  |_(___/ \____|\_||_|_|_(_____)____)_|    
                                                                                                                                                                                                     
-""")
+        """ + bc.ENDC)
+
+    if command == 'downloader_ill':
+        print(bc.OKGREEN + '''
+
+     _____                      _                 _             _____ _      _      
+    |  __ \                    | |               | |           |_   _| |    | |     
+    | |  | | _____      ___ __ | | ___   __ _  __| | ___ _ __    | | | |    | |     
+    | |  | |/ _ \ \ /\ / / '_ \| |/ _ \ / _` |/ _` |/ _ \ '__|   | | | |    | |     
+    | |__| | (_) \ V  V /| | | | | (_) | (_| | (_| |  __/ |     _| |_| |____| |____ 
+    |_____/ \___/ \_/\_/ |_| |_|_|\___/ \__,_|\__,_|\___|_|    |_____|______|______|
+                                            
+            
+        ''' + bc.ENDC)
+
+class bcolors:
+    HEADER = '\033[95m'
+    
+    INFO = '    [INFO] | '
+    OKBLUE = '\033[94m[DOWNLOAD] | '
+    WARNING = '\033[93m    [WARN] | '
+    FAIL = '\033[91m   [ERROR] | '
+
+    OKGREEN = '\033[92m'
+    ENDC = '\033[0m'

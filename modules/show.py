@@ -43,7 +43,7 @@ def show(class_name, download_dir, label_dir,total_images, index):
     file_path = os.path.join(label_dir, file_name)
     f = open(file_path, 'r')
 
-    window_name = "Visualizer: {}/{}".format(index, total_images)
+    window_name = "Visualizer: {}/{}".format(index+1, total_images)
 
     cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
     width = 500

@@ -8,8 +8,8 @@ def parser_arguments():
     parser = argparse.ArgumentParser(description='Open Image Dataset Downloader')
 
     parser.add_argument("command",
-                        metavar="<command> 'downloader' or 'visualizer'",
-                        help="'downloader' or 'visualizer'")
+                        metavar="<command> 'downloader', 'visualizer' or 'ill_downloader'.",
+                        help="'downloader', 'visualizer' or 'ill_downloader'.")
     parser.add_argument('--Dataset', required=False,
                         metavar="/path/to/OID/csv/",
                         help='Directory of the OID dataset folder')
@@ -19,6 +19,10 @@ def parser_arguments():
     parser.add_argument('--type_csv', required=False, choices=['train', 'test', 'validation', 'all'],
                         metavar="'train' or 'validation' or 'test' or 'all'",
                         help='From what csv search the images')
+
+    parser.add_argument('--sub', required=False, choices=['h', 'm'], 
+                        metavar="Subset of human verified images or machine generated (h or m)",
+                        help='Download from the human verified dataset or from the machine generated one.')
 
     parser.add_argument('--image_IsOccluded', required=False, choices=['0', '1'],
                         metavar="1 or 0",
