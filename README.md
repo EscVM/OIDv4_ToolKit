@@ -195,7 +195,7 @@ The Toolkit automatically will put the dataset and the csv folder in specific fo
 
 |              | downloader | visualizer | downloader_ill |                                                  |
 |-------------:|:----------:|:----------:|:--------------:|--------------------------------------------------|
-|      Dataset |      R     |      O     |        R       | Dataset folder name                              |
+|      Dataset |      O     |      O     |        O       | Dataset folder name                              |
 |      classes |      R     |            |        R       | Considered classes                               |
 |     type_csv |      R     |            |        R       | Train, test or validation dataset                |
 | multiclasses |      O     |            |        O       | Download classes toghether                       |
