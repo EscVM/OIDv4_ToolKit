@@ -85,8 +85,8 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
 						df_val = TTV(csv_dir, name_file)
 						if not args.n_threads:
  							download(args, df_val, folder[i], dataset_dir, class_name, class_code)
-					else:
-						download(args, df_val, folder[i], dataset_dir, class_name, class_code, threads = int(args.n_threads))
+						else:
+							download(args, df_val, folder[i], dataset_dir, class_name, class_code, threads = int(args.n_threads))
 				else:
 					print(bc.ERROR + 'csv file not specified' + bc.ENDC)
 					exit(1)
