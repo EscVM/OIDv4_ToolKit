@@ -1,15 +1,22 @@
-# OIDv4 ToolKit for Object Detection
+# ~ OIDv4 ToolKit ~
 
-Do you want to build your personal object detector but you don't have enough images to train your model? Have you already discovered [Open Images Dataset v4](https://storage.googleapis.com/openimages/web/index.html) that has [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes and more than 1,700,000 images ready to use? Do you want to exploit it for your projects but you don't want to download more than 500 GB of data!?
+Do you want to build your personal object detector but you don't have enough images to train your model? Do you want to train your personal image classifier, but your tired of the slowness of ImageNet? Have you already discovered [Open Images Dataset v4](https://storage.googleapis.com/openimages/web/index.html) that has [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes and more than 1,700,000 images with related bounding boxes ready to use? Do you want to exploit it for your projects but you don't want to download gigabytes and gigabytes of data!?
 
 With this repository we can help you to get the best of this dataset with less effort as possible.
-In particular, with this practical ToolKit written in Python3 we give you the following options:
+In particular, with this practical ToolKit written in Python3 we give you, for both object detection and image classification tasks, the following options:
 
-* download any class of the dataset individually, taking care of creating the related bounding boxes for each downloaded image
+**(2.0) Object Detection**
+
+* download any of the [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes of the dataset individually, taking care of creating the related bounding boxes for each downloaded image
 * download multiple classes at the same time creating separated folder and bounding boxes for each of them
 * download multiple classes and creating a common folder for all of them with a unique annotation file of each image
 * download a single class or multiple classes with the desired [attributes](https://storage.googleapis.com/openimages/web/download.html)
 * use the practical visualizer to inspect the donwloaded classes
+
+**(3.0) Image Classification** 
+
+* download any of the [19,794](https://storage.googleapis.com/openimages/web/download.html#attributes) classes in a common labeled folder
+* exploit tens of possible commands to select only the desired images (ex. like only test images)
 
 The code is quite documented and designed to be easy to extend and improve.
 Me and [Angelo](https://github.com/keldrom) are pleased if our little bit of code can help you with your project and research. Enjoy ;)
@@ -17,26 +24,37 @@ Me and [Angelo](https://github.com/keldrom) are pleased if our little bit of cod
 ![Snippet of the OIDv4 available classes](images/classes.png)
 
 # Open Image Dataset v4
-All the information related to this huge dataset can be found [here](https://storage.googleapis.com/openimages/web/index.html)
+All the information related to this huge dataset can be found [here](https://storage.googleapis.com/openimages/web/index.html).
 In these few lines are simply summarized some statistics and important tips.
+
+**Object Detection**
 
 <table>
     <tr><td></td><td><b>Train<b></td><td><b>Validation<b></td><td><b>Test<b></td><td><b>#Classes<b></td></tr>
     <tr><td>Images</td><td>1,743,042</td><td>41,620	</td><td>125,436</td><td>-</td></tr>
     <tr><td>Boxes</td><td>14,610,229</td><td>204,621</td><td>625,282</td><td>600</td></tr>
 </table>
+        
+**Image Classification** 
+
+<table>
+    <tr><td></td><td><b>Train<b></td><td><b>Validation<b></td><td><b>Test<b></td><td><b>#Classes<b></td></tr>
+    <tr><td>Images</td><td>9,011,219</td><td>41,620</td><td>125,436</td><td>-</td></tr>
+    <tr><td>Machine-Generated Labels</td><td>78,977,695</td><td>512,093</td><td>1,545,835</td><td>7,870</td></tr>
+    <tr><td>Human-Verified Labels</td><td>27,894,289</td><td>551,390</td><td>1,667,399</td><td>19,794</td></tr>
+</table>
 
 As it's possible to observe from the previous table we can have access to images from free different groups: train, validation and test.
 The ToolKit provides a way to select only a specific group where to search.
-It's important to underline that some annotations has been done as a group. It means that a single bounding box groups more than one istance. As mentioned by the creator of the dataset:
+Regarding object detection, it's important to underline that some annotations has been done as a group. It means that a single bounding box groups more than one istance. As mentioned by the creator of the dataset:
 - **IsGroupOf**: Indicates that the box spans a group of objects (e.g., a bed of flowers or a crowd of people). We asked annotators to use this tag for cases with more than 5 instances which are heavily occluding each other and are physically touching.
 That's again an option of the ToolKit that can be used to only grasp the desired images.
 
 Finally, it's interesting to notice that not all annotations has been produced by humans, but the creator also exploited an enhanced version of the method shown here reported [1](#reference)
 
-# Getting Started
+# 1.0 Getting Started
 
-## Installation
+## 1.1 Installation
 
 Python3 is required.
 
@@ -50,7 +68,7 @@ Python3 is required.
    ```
 Peek inside the requirements file if you have everything already installed. Most of the dependencies are common libraries.
 
-## Launch the ToolKit to check the available options
+## 1.2 Launch the ToolKit to check the available options
 First of all, if you simply want a quick reminder of al the possible options given by the script, you can simply launch, from your console of choice, the [main.py](main.py). Remember to point always at the main directory of the project
    ```bash
    python3 main.py
@@ -60,13 +78,13 @@ or in the following way to get more information
    python3 main.py -h
    ```
 
-# Use the ToolKit to download
+# 2.0 Use the ToolKit to download images for Object Detection
 The ToolKit permit the download of your dataset in the folder you want (`Dataset`as default). The folder can be imposed with the argument
 `--Dataset` so you can make different dataset with different options inside.
 
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
-## Download different classes in separated folders
+## 2.1 Download different classes in separated folders
 Firstly, the ToolKit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes or
 the path to the file.txt (`--classes path/to/file.txt`) that contains the list of all classes one for each lines (classes.txt uploaded as example).
 
@@ -126,7 +144,7 @@ If you have already downloaded the different csv files you can simply put them i
 
 If you interupt the downloading script `ctrl+d` you can always restart it from the last image downloaded.
 
-## Download multiple classes in a common folder
+## 2.2 Download multiple classes in a common folder
 This option allows to download more classes, but in a common folder. Also the related notations are mixed together with
  the already explained format (the first element is always the name of the single class). In this way, with a simple
  dictionary it's easy to parse the generated label to get the desired format.
@@ -140,13 +158,15 @@ Again if we want to download Apple and Oranges, but in a common folder
 
 <img align="right" src="images/rectangle.png">
 
-In the original dataset the coordinates of the bounding boxes are made in the following way:
+In the __original__ dataset the coordinates of the bounding boxes are made in the following way:
 
 **XMin**, **XMax**, **YMin**, **YMax**: coordinates of the box, in normalized image coordinates. XMin is in [0,1], where 0 is the leftmost pixel, and 1 is the rightmost pixel in the image. Y coordinates go from the top pixel (0) to the bottom pixel (1).
 
 However, in order to accomodate a more intuitive representation and give the maximum flexibility, every `.txt` annotation is made like:
 
 `name_of_the_class    left    top     right     bottom`
+
+where each coordinate is denormalized. So, the four different values correspond to the actual number of pixels of the related image.
 
 If you don't need the labels creation use `--noLabels`.
 
@@ -167,24 +187,7 @@ For example, with:
    ```
 only images without group annotations are downloaded.
 
-# Use the ToolKit to visualize the labeled images
-The ToolKit is useful also for visualize the downloaded images with the respective labels.
-```bash
-   python3 main.py visualizer
-   ```
-  In this way the default `Dataset` folder will be pointed to search the images and labels automatically. To point
-  another folder it's possible to use `--Dataset` optional argument.
-```bash
-   python3 main.py visualizer --Dataset desired_folder
-   ```
-Then the system will ask you which folder to visualize (train, validation or test) and the desired class.
-Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore all the images. Follow the menu for all the other options.
-
-<p align="center">
-  <img width="540" height="303" src="images/visualizer_example.gif">
-</p>
-
-# Download images from Image-Level Labels Dataset
+# 3.0 Download images from Image-Level Labels Dataset for Image Classifiction
 The Toolkit is now able to acess also to the huge dataset without bounding boxes. This dataset is formed by 19,995 classes and it's already divided into train, validation and test. The command used for the download from this dataset is ```downloader_ill``` (Downloader of Image-Level Labels) and requires the argument ```--sub```. This argument selects the sub-dataset between human-verified labels ```h``` (5,655,108 images) and machine-generated labels ```m``` (8,853,429 images). An example of command is:
 ```bash
 python3 main.py downloader_ill --sub m --classes Orange --type_csv train --limit 30
@@ -211,7 +214,24 @@ The Toolkit automatically will put the dataset and the csv folder in specific fo
 
 R = required, O = optional
 
-# Community Contributions
+# 4.0 Use the ToolKit to visualize the labeled images
+The ToolKit is useful also for visualize the downloaded images with the respective labels.
+```bash
+   python3 main.py visualizer
+   ```
+  In this way the default `Dataset` folder will be pointed to search the images and labels automatically. To point
+  another folder it's possible to use `--Dataset` optional argument.
+```bash
+   python3 main.py visualizer --Dataset desired_folder
+   ```
+Then the system will ask you which folder to visualize (train, validation or test) and the desired class.
+Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore all the images. Follow the menu for all the other options.
+
+<p align="center">
+  <img width="540" height="303" src="images/visualizer_example.gif">
+</p>
+
+# 5.0 Community Contributions
 - [Denis Zuenko](https://github.com/zuenko) has added multithreading to the ToolKit and is currently working on the generalization and speeding up process of the labels creation
 - [Skylion007](https://github.com/Skylion007) has improved labels creation reducing the runtime from O(nm) to O(n). That massively speeds up label generation
 - [Alex March](https://github.com/hosaka) has added the limit option to the ToolKit in order to download only a maximum number of images of a certain class
