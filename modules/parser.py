@@ -54,4 +54,11 @@ def parser_arguments():
                         metavar="integer number",
                         help='Optional limit on number of images to download')
 
+    # parser.add_argument('--additional_labels', required=False, default='0', choices=['0', '1'],
+    #                     metavar='0 (default) or 1',
+    #                     help='Whether download additional labels other ')
+
+    parser.add_argument('--additional_label_classes', required=False, default=None, nargs='+',
+                        metavar='list of classes',
+                        help='Additional classes for label generation.')
     return parser.parse_args()

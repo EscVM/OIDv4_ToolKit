@@ -35,7 +35,9 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
             args.multiclasses = 0
 
         folder = ['train', 'validation', 'test']
-        file_list = ['train-annotations-bbox.csv', 'validation-annotations-bbox.csv', 'test-annotations-bbox.csv']
+        file_list = {'train':'train-annotations-bbox.csv',
+                     'validation':'validation-annotations-bbox.csv',
+                     'test':'test-annotations-bbox.csv'}
 
         if args.classes[0].endswith('.txt'):
             with open(args.classes[0]) as f:
@@ -43,6 +45,13 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
                 args.classes = [x.strip() for x in args.classes]
         else:
             args.classes = [arg.replace('_', ' ') for arg in args.classes]
+
+        if args.additional_label_classes[0].endswith('.txt'):
+            with open(args.additional_label_classes[0]) as f:
+                args.additional_label_classes = f.readlines
+                args.additional_label_classes = [x.strip() for x in args.classes]
+        else:
+            args.additional_label_classes =  [arg.replace('_', ' ') for arg in args.additional_label_classes ]
 
         if args.multiclasses == '0':
 
@@ -58,38 +67,22 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
 
                 class_code = df_classes.loc[df_classes[1] == class_name].values[0][0]
 
-                if args.type_csv == 'train':
-                    name_file = file_list[0]
+                if args.type_csv in folder:
+                    name_file = file_list[args.type_csv]
                     df_val = csvdl.TTV(csv_dir, name_file)
                     if not args.n_threads:
-                        download(args, df_val, folder[0], dataset_dir, class_name, class_code)
+                        download(args, df_classes, df_val, args.type_csv, dataset_dir, class_name, class_code)
                     else:
-                        download(args, df_val, folder[0], dataset_dir, class_name, class_code, threads=int(args.n_threads))
-
-                elif args.type_csv == 'validation':
-                    name_file = file_list[1]
-                    df_val = csvdl.TTV(csv_dir, name_file)
-                    if not args.n_threads:
-                        download(args, df_val, folder[1], dataset_dir, class_name, class_code)
-                    else:
-                        download(args, df_val, folder[1], dataset_dir, class_name, class_code, threads=int(args.n_threads))
-
-                elif args.type_csv == 'test':
-                    name_file = file_list[2]
-                    df_val = csvdl.TTV(csv_dir, name_file)
-                    if not args.n_threads:
-                        download(args, df_val, folder[2], dataset_dir, class_name, class_code)
-                    else:
-                        download(args, df_val, folder[2], dataset_dir, class_name, class_code, threads=int(args.n_threads))
+                        download(args, df_classes, df_val, args.type_csv, dataset_dir, class_name, class_code, threads=int(args.n_threads))
 
                 elif args.type_csv == 'all':
-                    for i in range(3):
+                    for i in folder:
                         name_file = file_list[i]
                         df_val = csvdl.TTV(csv_dir, name_file)
                         if not args.n_threads:
-                            download(args, df_val, folder[i], dataset_dir, class_name, class_code)
+                            download(args, df_classes, df_val, folder[i], dataset_dir, class_name, class_code)
                         else:
-                            download(args, df_val, folder[i], dataset_dir, class_name, class_code, threads=int(args.n_threads))
+                            download(args, df_classes, df_val, folder[i], dataset_dir, class_name, class_code, threads=int(args.n_threads))
                 else:
                     print(bc.FAIL + 'csv file not specified' + bc.ENDC)
                     exit(1)
@@ -110,38 +103,22 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
 
             for class_name in class_list:
 
-                if args.type_csv == 'train':
-                    name_file = file_list[0]
+                if args.type_csv in folder:
+                    name_file = file_list[args.type_csv]
                     df_val = csvdl.TTV(csv_dir, name_file)
                     if not args.n_threads:
-                        download(args, df_val, folder[0], dataset_dir, class_name, class_dict[class_name], class_list)
+                        download(args, df_classes, df_val, args.type_csv, dataset_dir, class_name, class_dict[class_name], class_list)
                     else:
-                        download(args, df_val, folder[0], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_threads))
-
-                elif args.type_csv == 'validation':
-                    name_file = file_list[1]
-                    df_val = csvdl.TTV(csv_dir, name_file)
-                    if not args.n_threads:
-                        download(args, df_val, folder[1], dataset_dir, class_name, class_dict[class_name], class_list)
-                    else:
-                        download(args, df_val, folder[1], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_threads))
-
-                elif args.type_csv == 'test':
-                    name_file = file_list[2]
-                    df_val = csvdl.TTV(csv_dir, name_file)
-                    if not args.n_threads:
-                        download(args, df_val, folder[2], dataset_dir, class_name, class_dict[class_name], class_list)
-                    else:
-                        download(args, df_val, folder[2], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_threads))
+                        download(args, df_classes, df_val, args.type_csv, dataset_dir, class_name, class_dict[class_name], class_list, threads=int(args.n_threads))
 
                 elif args.type_csv == 'all':
-                    for i in range(3):
+                    for i in folder:
                         name_file = file_list[i]
                         df_val = csvdl.TTV(csv_dir, name_file)
                         if not args.n_threads:
-                            download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list)
+                            download(args, df_classes, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list)
                         else:
-                            download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list, int(args.n_threads))
+                            download(args, df_classes, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list, threads=int(args.n_threads))
 
 
     elif args.command == 'visualizer':

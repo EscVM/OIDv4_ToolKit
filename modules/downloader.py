@@ -5,10 +5,13 @@ from modules.utils import images_options
 from modules.utils import bcolors as bc
 from multiprocessing.dummy import Pool as ThreadPool
 
-def download(args, df_val, folder, dataset_dir, class_name, class_code, class_list=None, threads=20):
+import time
+
+def download(args, df_classes, df_val, folder, dataset_dir, class_name, class_code, class_list=None, threads=20):
     '''
     Manage the download of the images and the label maker.
     :param args: argument parser.
+    :param df_classes: DataFrame Classes
     :param df_val: DataFrame Values
     :param folder: train, validation or test
     :param dataset_dir: self explanatory
@@ -50,6 +53,9 @@ def download(args, df_val, folder, dataset_dir, class_name, class_code, class_li
     download_img(folder, dataset_dir, class_name_list, images_list, threads)
     if not args.sub:
         get_label(folder, dataset_dir, class_name, class_code, df_val, class_name_list, args)
+    
+    if args.additional_label_classes is not None:
+        get_additional_label(folder, dataset_dir, df_classes, df_val, args.additional_label_classes, class_name_list)
 
 
 def download_img(folder, dataset_dir, class_name, images_list, threads):
@@ -89,7 +95,7 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
 def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list, args):
     '''
     Make the label.txt files
-    :param folder: trai, validation or test
+    :param folder: train, validation or test
     :param dataset_dir: self explanatory
     :param class_name: self explanatory
     :param class_code: self explanatory
@@ -137,3 +143,48 @@ def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list, a
                 pass
 
         print(bc.INFO + 'Labels creation completed.' + bc.ENDC)
+
+
+def get_additional_label(folder, dataset_dir, df_classes, df_val, additional_class_list, class_list):
+    '''
+    Append additional labels for downloaded images.
+    :param folder: train, validation or test
+    :param dataset_dir: self explanatory
+    :param df_classes: DataFrame classes
+    :param df_val: DataFrame values
+    :param additional_class_list: list of label classes to download
+    :param class_list: name of image download folder, aka class_name_list
+    :retrun: None
+    '''
+    print(bc.INFO + 'Creating labels of classes {} for downloaded images.'.format(additional_class_list) + bc.ENDC)
+
+    download_dir = os.path.join(dataset_dir, folder, class_list)
+    label_dir = os.path.join(download_dir, 'Label')
+
+    downloaded_images_list = [f.split('.')[0] for f in os.listdir(download_dir) if f.endswith('.jpg')]
+    class_code_dict = {class_name: df_classes.loc[df_classes[1] == class_name].values[0][0] for class_name in additional_class_list}
+    groups_dict = {class_name: df_val[(df_val.LabelName == class_code_dict[class_name])].groupby(df_val.ImageID) for class_name in additional_class_list}
+
+    for image in downloaded_images_list:
+        current_image_path = os.path.join(download_dir, image + '.jpg')
+        dataset_image = cv2.imread(current_image_path)
+        image_width = int(dataset_image.shape[1])
+        image_height = int(dataset_image.shape[0])
+        file_name = image + '.txt'
+        file_path = os.path.join(label_dir, file_name)
+
+        with open(file_path, 'a') as f:
+            for class_name in additional_class_list:
+                try:
+                    boxes = groups_dict[class_name].get_group(image)[['XMin', 'XMax', 'YMin', 'YMax']].values.tolist()
+                except Exception as e:
+                    continue
+                for box in boxes:
+                    box[0] *= image_width
+                    box[1] *= image_width
+                    box[2] *= image_height
+                    box[3] *= image_height
+                    # each row in a file is name of the class_name, XMin, YMix, XMax, YMax (left top right bottom)
+                    print(class_name, box[0], box[2], box[1], box[3], file=f)
+
+    print(bc.INFO + 'Additional labels creation completed.' + bc.ENDC)
