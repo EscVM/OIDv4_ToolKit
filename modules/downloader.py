@@ -46,7 +46,7 @@ def download(args, df_val, folder, dataset_dir, class_name, class_code, class_li
         class_name_list = '_'.join(class_list)
     else:
         class_name_list = class_name
-        
+
     download_img(folder, dataset_dir, class_name_list, images_list, threads)
     if not args.sub:
         get_label(folder, dataset_dir, class_name, class_code, df_val, class_name_list, args)
@@ -74,7 +74,7 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
         commands = []
         for image in images_list:
             path = image_dir + '/' + str(image) + '.jpg ' + '"' + download_dir + '"'
-            command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path                        
+            command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path                    
             commands.append(command)
 
         list(tqdm(pool.imap(os.system, commands), total = len(commands) ))

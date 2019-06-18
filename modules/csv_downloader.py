@@ -8,7 +8,7 @@ from modules.utils import bcolors as bc
 
 OID_URL = 'https://storage.googleapis.com/openimages/2018_04/'
 
-def TTV(csv_dir, name_file):
+def TTV(csv_dir, name_file, args_y):
     '''
     Manage error_csv and read the correct .csv file.
 
@@ -17,11 +17,11 @@ def TTV(csv_dir, name_file):
     :return: None
     '''
     CSV = os.path.join(csv_dir, name_file)
-    error_csv(name_file, csv_dir)
+    error_csv(name_file, csv_dir, args_y)
     df_val = pd.read_csv(CSV)
     return df_val
 
-def error_csv(file, csv_dir):
+def error_csv(file, csv_dir, args_y):
     '''
     Check the presence of the required .csv files.
 
@@ -31,7 +31,11 @@ def error_csv(file, csv_dir):
     '''
     if not os.path.isfile(os.path.join(csv_dir, file)):
         print(bc.FAIL + "Missing the {} file.".format(os.path.basename(file)) + bc.ENDC)
-        ans = input(bc.OKBLUE + "Do you want to download the missing file? [Y/n] " + bc.ENDC)
+        if args_y:
+            ans = 'y'
+            print(bc.OKBLUE + "Automatic download." + bc.ENDC)
+        else:
+            ans = input(bc.OKBLUE + "Do you want to download the missing file? [Y/n] " + bc.ENDC)
 
         if ans.lower() == 'y':
             folder = str(os.path.basename(file)).split('-')[0]

@@ -11,6 +11,7 @@ Download specific classes of the huge online dataset Open Image Dataset.
 Licensed under the MIT License (see LICENSE for details)
 ------------------------------------------------------------
 Usage:
+refer to README.md file
 """
 from sys import exit
 from textwrap import dedent

@@ -13,6 +13,9 @@ def parser_arguments():
     parser.add_argument('--Dataset', required=False,
                         metavar="/path/to/OID/csv/",
                         help='Directory of the OID dataset folder')
+    parser.add_argument('-y', '--yes', required=False, action='store_true',
+                        #metavar="Yes to download missing files",
+                        help='ans Yes to possible download of missing files')
     parser.add_argument('--classes', required=False, nargs='+',
                         metavar="list of classes",
                         help="Sequence of 'strings' of the wanted classes")
@@ -20,7 +23,7 @@ def parser_arguments():
                         metavar="'train' or 'validation' or 'test' or 'all'",
                         help='From what csv search the images')
 
-    parser.add_argument('--sub', required=False, choices=['h', 'm'], 
+    parser.add_argument('--sub', required=False, choices=['h', 'm'],
                         metavar="Subset of human verified images or machine generated (h or m)",
                         help='Download from the human verified dataset or from the machine generated one.')
 

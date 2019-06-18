@@ -13,7 +13,7 @@ In particular, with this practical ToolKit written in Python3 we give you, for b
 * download a single class or multiple classes with the desired [attributes](https://storage.googleapis.com/openimages/web/download.html)
 * use the practical visualizer to inspect the donwloaded classes
 
-**(3.0) Image Classification** 
+**(3.0) Image Classification**
 
 * download any of the [19,794](https://storage.googleapis.com/openimages/web/download.html#attributes) classes in a common labeled folder
 * exploit tens of possible commands to select only the desired images (ex. like only test images)
@@ -34,8 +34,8 @@ In these few lines are simply summarized some statistics and important tips.
     <tr><td>Images</td><td>1,743,042</td><td>41,620	</td><td>125,436</td><td>-</td></tr>
     <tr><td>Boxes</td><td>14,610,229</td><td>204,621</td><td>625,282</td><td>600</td></tr>
 </table>
-        
-**Image Classification** 
+
+**Image Classification**
 
 <table>
     <tr><td></td><td><b>Train<b></td><td><b>Validation<b></td><td><b>Test<b></td><td><b>#Classes<b></td></tr>
@@ -179,11 +179,12 @@ The annotations of the dataset has been marked with a bunch of boolean values. T
 - **IsInside**: Indicates a picture taken from the inside of the object (e.g., a car interior or inside of a building).
 - **n_threads**: Select how many threads you want to use. The ToolKit will take care for you to download multiple images in parallel, considerably speeding up the downloading process.
 - **limit**: Limit the number of images being downloaded. Useful if you want to restrict the size of your dataset.
+- **y**: Answer yes when have to download missing csv files.
 
 Naturally, the ToolKit provides the same options as paramenters in order to filter the downloaded images.
 For example, with:
   ```bash
-   python3 main.py downloader --classes Apple Orange --type_csv validation --image_IsGroupOf 0
+   python3 main.py downloader -y --classes Apple Orange --type_csv validation --image_IsGroupOf 0
    ```
 only images without group annotations are downloaded.
 
@@ -193,24 +194,25 @@ The Toolkit is now able to acess also to the huge dataset without bounding boxes
 python3 main.py downloader_ill --sub m --classes Orange --type_csv train --limit 30
 ```
 The previously explained commands ```Dataset```, ```multiclasses```, ```n_threads``` and ```limit``` are available.
-The Toolkit automatically will put the dataset and the csv folder in specific folders that are renamed with a `_nl` at the end. 
+The Toolkit automatically will put the dataset and the csv folder in specific folders that are renamed with a `_nl` at the end.
 # Commands sum-up
 
-|              | downloader | visualizer | downloader_ill |                                                  |
-|-------------:|:----------:|:----------:|:--------------:|--------------------------------------------------|
-|      Dataset |      O     |      O     |        O       | Dataset folder name                              |
-|      classes |      R     |            |        R       | Considered classes                               |
-|     type_csv |      R     |            |        R       | Train, test or validation dataset                |
-| multiclasses |      O     |            |        O       | Download classes toghether                       |
-|     noLabels |      O     |            |                | Don't create labels                              |
-|   IsOccluded |      O     |            |                | Consider or not this filter                      |
-|  IsTruncated |      O     |            |                | Consider or not this filter                      |
-|    IsGroupOf |      O     |            |                | Consider or not this filter                      |
-|  IsDepiction |      O     |            |                | Consider or not this filter                      |
-|     IsInside |      O     |            |                | Consider or not this filter                      |
-|    n_threads |      O     |            |        O       | Indicates the maximum threads number             |
-|        limit |      O     |            |        O       | Max number of images to download                 |
-|          sub |            |            |        R       | Human-verified or Machine-generated images (h/m) |
+|                    | downloader | visualizer | downloader_ill |                                                  |
+|-------------------:|:----------:|:----------:|:--------------:|--------------------------------------------------|
+|            Dataset |      O     |      O     |        O       | Dataset folder name                              |
+|            classes |      R     |            |        R       | Considered classes                               |
+|           type_csv |      R     |            |        R       | Train, test or validation dataset                |
+|                  y |      O     |            |        O       | Answer yes when downloading missing csv files    |
+|       multiclasses |      O     |            |        O       | Download classes toghether                       |
+|           noLabels |      O     |            |                | Don't create labels                              |
+|   Image_IsOccluded |      O     |            |                | Consider or not this filter                      |
+|  Image_IsTruncated |      O     |            |                | Consider or not this filter                      |
+|    Image_IsGroupOf |      O     |            |                | Consider or not this filter                      |
+|  Image_IsDepiction |      O     |            |                | Consider or not this filter                      |
+|     Image_IsInside |      O     |            |                | Consider or not this filter                      |
+|          n_threads |      O     |            |        O       | Indicates the maximum threads number             |
+|              limit |      O     |            |        O       | Max number of images to download                 |
+|                sub |            |            |        R       | Human-verified or Machine-generated images (h/m) |
 
 R = required, O = optional
 

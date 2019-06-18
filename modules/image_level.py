@@ -35,7 +35,7 @@ def image_level(args, DEFAULT_OID_DIR):
 		             'test-annotations-machine-imagelabels.csv']
 
 	if args.sub == 'h' or args.sub == 'm':
-	
+
 		logo(args.command)
 
 		if args.type_csv is None:
@@ -64,14 +64,14 @@ def image_level(args, DEFAULT_OID_DIR):
 
 				class_name = classes
 
-				error_csv(name_file_class, csv_dir)
+				error_csv(name_file_class, csv_dir, args.yes)
 				df_classes = pd.read_csv(CLASSES_CSV, header=None)
 
 				class_code = df_classes.loc[df_classes[1] == class_name].values[0][0]
 
 				if args.type_csv == 'train':
 					name_file = file_list[0]
-					df_val = TTV(csv_dir, name_file)
+					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
 						download(args, df_val, folder[0], dataset_dir, class_name, class_code)
 					else:
@@ -79,7 +79,7 @@ def image_level(args, DEFAULT_OID_DIR):
 
 				elif args.type_csv == 'validation':
 					name_file = file_list[1]
-					df_val = TTV(csv_dir, name_file)
+					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
 						download(args, df_val, folder[1], dataset_dir, class_name, class_code)
 					else:
@@ -87,7 +87,7 @@ def image_level(args, DEFAULT_OID_DIR):
 
 				elif args.type_csv == 'test':
 					name_file = file_list[2]
-					df_val = TTV(csv_dir, name_file)
+					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
 						download(args, df_val, folder[2], dataset_dir, class_name, class_code)
 					else:
@@ -96,7 +96,7 @@ def image_level(args, DEFAULT_OID_DIR):
 				elif args.type_csv == 'all':
 					for i in range(3):
 						name_file = file_list[i]
-						df_val = TTV(csv_dir, name_file)
+						df_val = TTV(csv_dir, name_file, args.yes)
 						if not args.n_threads:
  							download(args, df_val, folder[i], dataset_dir, class_name, class_code)
 					else:
@@ -112,7 +112,7 @@ def image_level(args, DEFAULT_OID_DIR):
 			multiclass_name = ['_'.join(class_list)]
 			mkdirs(dataset_dir, csv_dir, multiclass_name, args.type_csv)
 
-			error_csv(name_file_class, csv_dir)
+			error_csv(name_file_class, csv_dir, args.yes)
 			df_classes = pd.read_csv(CLASSES_CSV, header=None)
 
 			class_dict = {}
@@ -123,7 +123,7 @@ def image_level(args, DEFAULT_OID_DIR):
 
 				if args.type_csv == 'train':
 					name_file = file_list[0]
-					df_val = TTV(csv_dir, name_file)
+					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
 						download(args, df_val, folder[0], dataset_dir, class_name, class_dict[class_name], class_list)
 					else:
@@ -131,7 +131,7 @@ def image_level(args, DEFAULT_OID_DIR):
 
 				elif args.type_csv == 'validation':
 					name_file = file_list[1]
-					df_val = TTV(csv_dir, name_file)
+					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
 						download(args, df_val, folder[1], dataset_dir, class_name, class_dict[class_name], class_list)
 					else:
@@ -139,7 +139,7 @@ def image_level(args, DEFAULT_OID_DIR):
 
 				elif args.type_csv == 'test':
 					name_file = file_list[2]
-					df_val = TTV(csv_dir, name_file)
+					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
 						download(args, df_val, folder[2], dataset_dir, class_name, class_dict[class_name], class_list)
 					else:
@@ -148,7 +148,7 @@ def image_level(args, DEFAULT_OID_DIR):
 				elif args.type_csv == 'all':
 					for i in range(3):
 						name_file = file_list[i]
-						df_val = TTV(csv_dir, name_file)
+						df_val = TTV(csv_dir, name_file, args.yes)
 						if not args.n_threads:
 							download(args, df_val, folder[i], dataset_dir, class_name, class_dict[class_name], class_list)
 						else:
