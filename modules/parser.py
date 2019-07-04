@@ -57,4 +57,6 @@ def parser_arguments():
                         metavar="integer number",
                         help='Optional limit on number of images to download')
 
+    parser.add_argument('--yoloLabelStyle', required=False, action='store_true' ,help='write label in style <object-class-index> <x-mid> <y-mid> <width> <height>to fit yolo net')
+
     return parser.parse_args()
