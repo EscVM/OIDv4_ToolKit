@@ -59,34 +59,34 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
 					name_file = file_list[0]
 					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
-						download(args, df_val, folder[0], dataset_dir, class_name, class_code)
+						download(args, df_val, folder[0], dataset_dir, class_name, class_code, class_list_for_yolo=args.classes)
 					else:
-						download(args, df_val, folder[0], dataset_dir, class_name, class_code, threads = int(args.n_threads))
+						download(args, df_val, folder[0], dataset_dir, class_name, class_code, threads = int(args.n_threads), class_list_for_yolo=args.classes)
 
 				elif args.type_csv == 'validation':
 					name_file = file_list[1]
 					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
-						download(args, df_val, folder[1], dataset_dir, class_name, class_code)
+						download(args, df_val, folder[1], dataset_dir, class_name, class_code,class_list_for_yolo=args.classes)
 					else:
-						download(args, df_val, folder[1], dataset_dir, class_name, class_code, threads = int(args.n_threads))
+						download(args, df_val, folder[1], dataset_dir, class_name, class_code, threads = int(args.n_threads), class_list_for_yolo=args.classes)
 
 				elif args.type_csv == 'test':
 					name_file = file_list[2]
 					df_val = TTV(csv_dir, name_file, args.yes)
 					if not args.n_threads:
-						download(args, df_val, folder[2], dataset_dir, class_name, class_code)
+						download(args, df_val, folder[2], dataset_dir, class_name, class_code, class_list_for_yolo=args.classes)
 					else:
-						download(args, df_val, folder[2], dataset_dir, class_name, class_code, threads = int(args.n_threads))
+						download(args, df_val, folder[2], dataset_dir, class_name, class_code, threads = int(args.n_threads),class_list_for_yolo=args.classes)
 
 				elif args.type_csv == 'all':
 					for i in range(3):
 						name_file = file_list[i]
 						df_val = TTV(csv_dir, name_file, args.yes)
 						if not args.n_threads:
- 							download(args, df_val, folder[i], dataset_dir, class_name, class_code)
+ 							download(args, df_val, folder[i], dataset_dir, class_name, class_code,class_list_for_yolo=args.classes)
 						else:
-							download(args, df_val, folder[i], dataset_dir, class_name, class_code, threads = int(args.n_threads))
+							download(args, df_val, folder[i], dataset_dir, class_name, class_code, threads = int(args.n_threads),class_list_for_yolo=args.classes)
 				else:
 					print(bc.ERROR + 'csv file not specified' + bc.ENDC)
 					exit(1)
