@@ -24,6 +24,9 @@ setup(
     include_package_data=True,
     install_requires=[
         "awscli",
+        "pandas",
+        "opencv-python",
+        "tqdm",
     ],
     keywords=[
         "openimages",
