@@ -5,6 +5,7 @@ from modules.utils import images_options
 from modules.utils import bcolors as bc
 from multiprocessing.dummy import Pool as ThreadPool
 
+
 def download(args, df_val, folder, dataset_dir, class_name, class_code, class_list=None, threads = 20):
     '''
     Manage the download of the images and the label maker.
@@ -74,7 +75,7 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
         commands = []
         for image in images_list:
             path = image_dir + '/' + str(image) + '.jpg ' + '"' + download_dir + '"'
-            command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path                    
+            command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path
             commands.append(command)
 
         list(tqdm(pool.imap(os.system, commands), total = len(commands) ))
