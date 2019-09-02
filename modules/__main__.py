@@ -1,5 +1,4 @@
 import os
-import sys
 
 from modules.parser import parser_arguments
 from modules.bounding_boxes import bounding_boxes_images
