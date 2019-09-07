@@ -20,7 +20,7 @@ setup(
     ),
     long_description=README,
     long_description_content_type="text/markdown",
-    packages=["modules"],
+    packages=["oidv4_toolkit"],
     include_package_data=True,
     install_requires=[
         "awscli",
@@ -42,7 +42,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "oidv4_toolkit = modules.__main__:main",
+            "oidv4_toolkit = oidv4_toolkit.__main__:main",
         ],
     }
 )

@@ -1,10 +1,10 @@
 import os
-from modules.utils import *
-from modules.downloader import *
-from modules.show import *
-from modules.csv_downloader import *
+from oidv4_toolkit.utils import *
+from oidv4_toolkit.downloader import *
+from oidv4_toolkit.show import *
+from oidv4_toolkit.csv_downloader import *
 
-from modules.utils import bcolors as bc
+from oidv4_toolkit.utils import bcolors as bc
 
 def bounding_boxes_images(args, DEFAULT_OID_DIR):
 

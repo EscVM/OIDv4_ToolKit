@@ -1,8 +1,8 @@
 import os
 import cv2
 from tqdm import tqdm
-from modules.utils import images_options
-from modules.utils import bcolors as bc
+from oidv4_toolkit.utils import images_options
+from oidv4_toolkit.utils import bcolors as bc
 from multiprocessing.dummy import Pool as ThreadPool
 
 

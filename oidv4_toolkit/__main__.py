@@ -1,8 +1,8 @@
 import os
 
-from modules.parser import parser_arguments
-from modules.bounding_boxes import bounding_boxes_images
-from modules.image_level import image_level
+from oidv4_toolkit.parser import parser_arguments
+from oidv4_toolkit.bounding_boxes import bounding_boxes_images
+from oidv4_toolkit.image_level import image_level
 
 ROOT_DIR = ''
 DEFAULT_OID_DIR = os.path.join(ROOT_DIR, 'OID')
