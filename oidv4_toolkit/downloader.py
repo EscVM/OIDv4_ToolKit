@@ -19,19 +19,19 @@ def download(args, df_val, folder, dataset_dir, class_name, class_code, class_li
     :param threads: number of threads
     :return: None
     '''
-    if os.name == 'posix':
-        rows, columns = os.popen('stty size', 'r').read().split()
-    elif os.name == 'nt':
-        try:
-            columns, rows = os.get_terminal_size(0)
-        except OSError:
-            columns, rows = os.get_terminal_size(1)
-    else:
-        columns = 50
-    l = int((int(columns) - len(class_name))/2)
-
-    print ('\n' + bc.HEADER + '-'*l + class_name + '-'*l + bc.ENDC)
-    print(bc.INFO + 'Downloading {} images.'.format(args.type_csv) + bc.ENDC)
+    # if os.name == 'posix':
+    #     rows, columns = os.popen('stty size', 'r').read().split()
+    # elif os.name == 'nt':
+    #     try:
+    #         columns, rows = os.get_terminal_size(0)
+    #     except OSError:
+    #         columns, rows = os.get_terminal_size(1)
+    # else:
+    #     columns = 50
+    # l = int((int(columns) - len(class_name))/2)
+    #
+    # print ('\n' + bc.HEADER + '-'*l + class_name + '-'*l + bc.ENDC)
+    # print(bc.INFO + 'Downloading {} images.'.format(args.type_csv) + bc.ENDC)
     df_val_images = images_options(df_val, args)
 
     images_list = df_val_images['ImageID'][df_val_images.LabelName == class_code].values
