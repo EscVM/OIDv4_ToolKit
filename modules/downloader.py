@@ -130,7 +130,7 @@ def get_label(folder, dataset_dir, class_name, class_code, df_val, class_list, a
                     box[2] *= int(dataset_image.shape[0])
                     box[3] *= int(dataset_image.shape[0])
 
-                    # each row in a file is name of the class_name, XMin, YMix, XMax, YMax (left top right bottom)
+                    # each row in a file is name of the class_name, XMin, YMin, XMax, YMax (left top right bottom)
                     print(class_name, box[0], box[2], box[1], box[3], file=f)
 
             except Exception as e:
