@@ -1,9 +1,6 @@
 pandas
 numpy
 awscli
-
 urllib3
-
 tqdm
-
 opencv-python
