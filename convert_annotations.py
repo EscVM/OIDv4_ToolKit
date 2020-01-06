@@ -29,6 +29,7 @@ classes = {}
 with open("classes.txt", "r") as myFile:
     for num, line in enumerate(myFile, 0):
         line = line.rstrip("\n")
+        line = line.replace(" ", "_")
         classes[line] = num
     myFile.close()
 
@@ -64,6 +65,9 @@ for DIR in DIRS:
                         annotations = []
                         with open(filename) as f:
                             for line in f:
+                                # this is for finding classes with space in name ex. 'Alarm clock' and replacing space with underscore
+                                if CLASS_DIR.replace("_", " ") in line:
+                                    line = line.replace(CLASS_DIR.replace("_", " "), CLASS_DIR)
                                 labels = line.split()
                                 if classes.get(labels[0]) != None:
                                     labels[0] = classes.get(labels[0])
