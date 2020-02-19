@@ -62,7 +62,7 @@ Python3 is required.
    ```bash
    git clone https://github.com/EscVM/OIDv4_ToolKit.git
    ```
-2. Install the required packages
+2. Install the required packages (You need to run the following command from within the OIDv4_ToolKit directory)
    ```bash
    pip3 install -r requirements.txt
    ```
