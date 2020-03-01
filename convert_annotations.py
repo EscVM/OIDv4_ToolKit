@@ -29,10 +29,8 @@ classes = {}
 with open("classes.txt", "r") as myFile:
     for num, line in enumerate(myFile, 0):
         line = line.rstrip("\n")
-        line = line.replace(" ", "_")
         classes[line] = num
     myFile.close()
-
 # step into dataset directory
 os.chdir(os.path.join("OID", "Dataset"))
 DIRS = os.listdir(os.getcwd())
@@ -42,12 +40,6 @@ for DIR in DIRS:
     if os.path.isdir(DIR):
         os.chdir(DIR)
         print("Currently in subdirectory:", DIR)
-        
-        CLASS_DIRS = os.listdir(os.getcwd())
-        # for all class folders rename folder if space occurs in name
-        for CLASS_DIR in CLASS_DIRS:
-            if " " in CLASS_DIR:
-                os.rename(CLASS_DIR, CLASS_DIR.replace(" ", "_"))
         
         CLASS_DIRS = os.listdir(os.getcwd())
         # for all class folders step into directory to change annotations
@@ -65,15 +57,12 @@ for DIR in DIRS:
                         annotations = []
                         with open(filename) as f:
                             for line in f:
-                                # this is for finding classes with space in name ex. 'Alarm clock' and replacing space with underscore
-                                if CLASS_DIR.replace("_", " ") in line:
-                                    line = line.replace(CLASS_DIR.replace("_", " "), CLASS_DIR)
+                                for class_type in classes:
+                                    line = line.replace(class_type, str(classes.get(class_type)))
                                 labels = line.split()
-                                if classes.get(labels[0]) != None:
-                                    labels[0] = classes.get(labels[0])
-                                    coords = np.asarray([float(labels[1]), float(labels[2]), float(labels[3]), float(labels[4])])
-                                    coords = convert(filename_str, coords)
-                                    labels[1], labels[2], labels[3], labels[4] = coords[0], coords[1], coords[2], coords[3]
+                                coords = np.asarray([float(labels[1]), float(labels[2]), float(labels[3]), float(labels[4])])
+                                coords = convert(filename_str, coords)
+                                labels[1], labels[2], labels[3], labels[4] = coords[0], coords[1], coords[2], coords[3]
                                 newline = str(labels[0]) + " " + str(labels[1]) + " " + str(labels[2]) + " " + str(labels[3]) + " " + str(labels[4])
                                 line = line.replace(line, newline)
                                 annotations.append(line)
