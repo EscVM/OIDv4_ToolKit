@@ -4,6 +4,7 @@ from tqdm import tqdm
 from modules.utils import images_options
 from modules.utils import bcolors as bc
 from multiprocessing.dummy import Pool as ThreadPool
+import subprocess
 
 def download(args, df_val, folder, dataset_dir, class_name, class_code, class_list=None, threads = 20):
     '''
@@ -77,7 +78,7 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
             command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path                    
             commands.append(command)
 
-        list(tqdm(pool.imap(os.system, commands), total = len(commands) ))
+        list(tqdm(pool.imap(lambda c: subprocess.call(c, shell=True), commands), total = len(commands) ))
 
         print(bc.INFO + 'Done!' + bc.ENDC)
         pool.close()
