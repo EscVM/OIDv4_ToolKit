@@ -18,6 +18,9 @@ def TTV(csv_dir, name_file, args_y):
     '''
     CSV = os.path.join(csv_dir, name_file)
     error_csv(name_file, csv_dir, args_y)
+
+    # Let the user know what's going on. Some of these files have over a GB and it takes a while to load them.
+    print("Loading CSV file...")
     df_val = pd.read_csv(CSV)
     return df_val
 
@@ -37,7 +40,7 @@ def error_csv(file, csv_dir, args_y):
         else:
             ans = input(bc.OKBLUE + "Do you want to download the missing file? [Y/n] " + bc.ENDC)
 
-        if ans.lower() == 'y':
+        if ans.lower() == 'y' or ans == '':
             folder = str(os.path.basename(file)).split('-')[0]
             if folder != 'class':
                 FILE_URL = str(OID_URL + folder + '/' + file)
