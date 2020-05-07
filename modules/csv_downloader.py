@@ -37,7 +37,7 @@ def error_csv(file, csv_dir, args_y):
         else:
             ans = input(bc.OKBLUE + "Do you want to download the missing file? [Y/n] " + bc.ENDC)
 
-        if ans.lower() == 'y':
+        if ans.lower() == 'y' or ans == '':
             folder = str(os.path.basename(file)).split('-')[0]
             if folder != 'class':
                 FILE_URL = str(OID_URL + folder + '/' + file)
