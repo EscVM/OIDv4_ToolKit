@@ -18,6 +18,9 @@ def TTV(csv_dir, name_file, args_y):
     '''
     CSV = os.path.join(csv_dir, name_file)
     error_csv(name_file, csv_dir, args_y)
+
+    # Let the user know what's going on. Some of these files have over a GB and it takes a while to load them.
+    print("Loading CSV file...")
     df_val = pd.read_csv(CSV)
     return df_val
 
