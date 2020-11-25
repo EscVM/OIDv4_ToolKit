@@ -84,6 +84,12 @@ The ToolKit permit the download of your dataset in the folder you want (`Dataset
 
 As previously mentioned, there are different available options that can be exploited. Let's see some of them.
 
+# 2.0.1 Download image masks from OIDv5 Dataset
+Run get_masks.sh. This will download all masks and unzip them. TODO add estimated size (~4GB?)
+Unless the `--skip_json_gen` flag is used, this should be run before running main to ensure all necessary files are present. 
+If this flag is not set, the program will trace the mask data on the image and store the traced mask as points in a json file modelled after `template.json`. 
+[ ] TODO ensure that classes are saved to the json as well as the mask shape
+
 ## 2.1 Download different classes in separated folders
 Firstly, the ToolKit can be used to download classes in separated folders. The argument `--classes` accepts a list of classes or
 the path to the file.txt (`--classes path/to/file.txt`) that contains the list of all classes one for each lines (classes.txt uploaded as example).
@@ -107,9 +113,26 @@ main_folder
     │   file012.txt
     │
     └───csv_folder
-    |    │   class-descriptions-boxable.csv
-    |    │   validation-annotations-bbox.csv
-    |
+    │    │   class-descriptions-boxable.csv
+    │    │   validation-annotations-bbox.csv
+    │
+    └───masks
+    │    │
+    │    └───zips
+    │    │    │   validation-masks-0.zip
+    │    │    │   test-masks-8.zip
+    │    │    │   ...-masks-....zip
+    │    │    │   train-masks-f.zip
+    │    │
+    │    └───00
+    │    │    │   00....zip
+    │    │    │   ...
+    │    └───..
+    │    └───0f
+    │    │    │   0f....zip
+    │    │    │   ...
+    │    │
+    │
     └───Dataset
         |
         └─── test

@@ -1,0 +1,22 @@
+{
+    "version": "3.16.7",
+    "flags": {
+    },
+    "shapes": [
+    ],
+    "lineColor": [
+      0,
+      255,
+      0,
+      128
+    ],
+    "fillColor": [
+      255,
+      0,
+      0,
+      128
+    ],
+    "imagePath": null,
+    "imageHeight": null,
+    "imageWidth": null
+  }

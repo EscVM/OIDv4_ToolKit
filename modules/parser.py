@@ -56,5 +56,8 @@ def parser_arguments():
     parser.add_argument('--limit', required=False, type=int, default=None,
                         metavar="integer number",
                         help='Optional limit on number of images to download')
+    
+    parser.add_argument('--skip_json_gen', '--sjg', required=False, default=False, action='store_true',
+                        help='whether or not to generate labelme jsons and json mask paths')
 
     return parser.parse_args()

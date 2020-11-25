@@ -6,7 +6,8 @@ import pandas as pd
 
 from modules.utils import bcolors as bc
 
-OID_URL = 'https://storage.googleapis.com/openimages/2018_04/'
+# OID_URL = 'https://storage.googleapis.com/openimages/2018_04/'
+OID_URL = 'https://storage.googleapis.com/openimages/v5/'
 
 def TTV(csv_dir, name_file, args_y):
     '''
@@ -40,11 +41,12 @@ def error_csv(file, csv_dir, args_y):
         if ans.lower() == 'y':
             folder = str(os.path.basename(file)).split('-')[0]
             if folder != 'class':
-                FILE_URL = str(OID_URL + folder + '/' + file)
+                FILE_URL = str(OID_URL + file)
             else:
                 FILE_URL = str(OID_URL + file)
 
             FILE_PATH = os.path.join(csv_dir, file)
+            print("downloading " + FILE_URL)
             save(FILE_URL, FILE_PATH)
             print('\n' + bc.OKBLUE + "File {} downloaded into {}.".format(file, FILE_PATH) + bc.ENDC)
 

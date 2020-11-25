@@ -20,7 +20,7 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
 
 	if args.command == 'downloader':
 
-		logo(args.command)
+		# logo(args.command)
 
 		if args.type_csv is None:
 			print(bc.FAIL + 'Missing type_csv argument.' + bc.ENDC)
@@ -32,7 +32,8 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
 			args.multiclasses = 0
 
 		folder = ['train', 'validation', 'test']
-		file_list = ['train-annotations-bbox.csv', 'validation-annotations-bbox.csv', 'test-annotations-bbox.csv']
+		# file_list = ['train-annotations-bbox.csv', 'validation-annotations-bbox.csv', 'test-annotations-bbox.csv']
+		file_list = ['train-annotations-object-segmentation.csv', 'validation-annotations-object-segmentation.csv', 'test-annotations-object-segmentation.csv']
 
 		if args.classes[0].endswith('.txt'):
 			with open(args.classes[0]) as f:
@@ -81,6 +82,7 @@ def bounding_boxes_images(args, DEFAULT_OID_DIR):
 
 				elif args.type_csv == 'all':
 					for i in range(3):
+						# print("\n\n# Fetching " + folder[i] + " set for " + class_name)
 						name_file = file_list[i]
 						df_val = TTV(csv_dir, name_file, args.yes)
 						if not args.n_threads:

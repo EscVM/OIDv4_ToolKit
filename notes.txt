@@ -1,0 +1,6 @@
+Run prompt for opening labelme:
+cmd /c "conda activate labelme-orig & labelme & exit"
+
+get_masks.sh should be run to download and unpack all masks unless the flag --skip_json_gen is used. This flag prevents the program from tracing masks and putting the shape into a json file based off of  template.json.
+
+python ./main.py downloader --classes Truck --type_csv all
