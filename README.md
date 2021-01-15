@@ -197,22 +197,22 @@ The previously explained commands ```Dataset```, ```multiclasses```, ```n_thread
 The Toolkit automatically will put the dataset and the csv folder in specific folders that are renamed with a `_nl` at the end.
 # Commands sum-up
 
-|                    | downloader | visualizer | downloader_ill |                                                  |
-|-------------------:|:----------:|:----------:|:--------------:|--------------------------------------------------|
-|            Dataset |      O     |      O     |        O       | Dataset folder name                              |
-|            classes |      R     |            |        R       | Considered classes                               |
-|           type_csv |      R     |            |        R       | Train, test or validation dataset                |
-|                  y |      O     |            |        O       | Answer yes when downloading missing csv files    |
-|       multiclasses |      O     |            |        O       | Download classes toghether                       |
-|           noLabels |      O     |            |                | Don't create labels                              |
-|   Image_IsOccluded |      O     |            |                | Consider or not this filter                      |
-|  Image_IsTruncated |      O     |            |                | Consider or not this filter                      |
-|    Image_IsGroupOf |      O     |            |                | Consider or not this filter                      |
-|  Image_IsDepiction |      O     |            |                | Consider or not this filter                      |
-|     Image_IsInside |      O     |            |                | Consider or not this filter                      |
-|          n_threads |      O     |            |        O       | Indicates the maximum threads number             |
-|              limit |      O     |            |        O       | Max number of images to download                 |
-|                sub |            |            |        R       | Human-verified or Machine-generated images (h/m) |
+|                     | downloader | visualizer | downloader_ill |                                                  |
+|--------------------:|:----------:|:----------:|:--------------:|--------------------------------------------------|
+|          `Dataset`  |      O     |      O     |        O       | Dataset folder name                              |
+|           `classes` |      R     |            |        R       | Considered classes                               |
+|          `type_csv` |      R     |            |        R       | Train, test or validation dataset                |
+|                 `y` |      O     |            |        O       | Answer yes when downloading missing csv files    |
+|      `multiclasses` |      O     |            |        O       | Download classes toghether                       |
+|          `noLabels` |      O     |            |                | Don't create labels                              |
+|  `image_IsOccluded` |      O     |            |                | Consider or not this filter                      |
+| `image_IsTruncated` |      O     |            |                | Consider or not this filter                      |
+|   `image_IsGroupOf` |      O     |            |                | Consider or not this filter                      |
+| `image_IsDepiction` |      O     |            |                | Consider or not this filter                      |
+|    `image_IsInside` |      O     |            |                | Consider or not this filter                      |
+|         `n_threads` |      O     |            |        O       | Indicates the maximum threads number             |
+|             `limit` |      O     |            |        O       | Max number of images to download                 |
+|               `sub` |            |            |        R       | Human-verified or Machine-generated images (h/m) |
 
 R = required, O = optional
 
