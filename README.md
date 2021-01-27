@@ -1,4 +1,4 @@
-<h1 align="center"> ~ OIDv4 ToolKit ~ </h1>
+<h1 align="center"> ~ OIDv4 ToolKit ~ <br> (compatible with OIDv6)</h1>
 
 Do you want to build your personal object detector but you don't have enough images to train your model? Do you want to train your personal image classifier, but you are tired of the deadly slowness of ImageNet? Have you already discovered [Open Images Dataset v4](https://storage.googleapis.com/openimages/web/index.html) that has [600](https://storage.googleapis.com/openimages/2018_04/bbox_labels_600_hierarchy_visualizer/circle.html) classes and more than 1,700,000 images with related bounding boxes ready to use? Do you want to exploit it for your projects but you don't want to download gigabytes and gigabytes of data!?
 
@@ -96,7 +96,7 @@ Let's for example download Apples and Oranges from the validation set. In this c
   ```bash
    python3 main.py downloader --classes Apple Orange --type_csv validation
    ```
-The algorith will take care to download all the necessary files and build the directory structure like this:
+The algorithm will take care to download all the necessary files and build the directory structure like this:
 
 ```
 main_folder
@@ -143,6 +143,22 @@ main_folder
 If you have already downloaded the different csv files you can simply put them in the `csv_folder`. The script takes automatically care of the download of these files, but if you want to manually download them for whatever reason [here](https://storage.googleapis.com/openimages/web/download.html) you can find them.
 
 If you interupt the downloading script `ctrl+d` you can always restart it from the last image downloaded.
+
+## 2.1.1 Update the Open Image Dataset csv file from v4 to v6 or above
+The algorithm default downloads Open Image Dataset v4 csv file (train/validation/test-annotations-bbox.csv)
+
+If you want to use a updated version (e.g. v5, v6), you can download the annotations-bbox.csv manually from Open Image Dataset offical website.
+
+Follow below steps to make changes: <br>
+*Assuem you are using the same directory structure as above and taking OID v6 as example*
+1. [Enter](https://storage.googleapis.com/openimages/web/download.html)
+2. Click "V6" button in the first line and then scroll down to "Download the annotations and metadata" and click "Train" button to download train csv file in "Boxes" row
+3. After downloading, put the `oidv6-train-annotations-bbox.csv` into `YOUR_PATH_/OIDv4_ToolKit/OID/csv_folder`
+4. Change the name of `oidv6-train-annotations-bbox.csv` to `train-annotations-bbox.csv` (this is for `main.py` easier look up, you can edit the code in `main.py` if you don't want to rename the csv file)
+5. Use the same command as usual
+
+P.S. `class-descriptions-boxable.csv` of v4 and v6 are the same, you can follow `STEP 2` to download it manually, 
+<br>"Metadata ---->  Class Names" and put it into `/csv_folder`
 
 ## 2.2 Download multiple classes in a common folder
 This option allows to download more classes, but in a common folder. Also the related notations are mixed together with
