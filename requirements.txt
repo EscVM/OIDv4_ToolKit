@@ -11,7 +11,7 @@ pyasn1==0.4.7
 python-dateutil==2.8.0
 pytz==2019.2
 PyYAML==5.4
-rsa==4.1
+rsa==4.7
 s3transfer==0.2.1
 six==1.12.0
 tqdm==4.35.0
