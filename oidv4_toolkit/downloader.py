@@ -1,9 +1,10 @@
 import os
 import cv2
 from tqdm import tqdm
-from modules.utils import images_options
-from modules.utils import bcolors as bc
+from oidv4_toolkit.utils import images_options
+from oidv4_toolkit.utils import bcolors as bc
 from multiprocessing.dummy import Pool as ThreadPool
+
 
 def download(args, df_val, folder, dataset_dir, class_name, class_code, class_list=None, threads = 20):
     '''
@@ -18,19 +19,19 @@ def download(args, df_val, folder, dataset_dir, class_name, class_code, class_li
     :param threads: number of threads
     :return: None
     '''
-    if os.name == 'posix':
-        rows, columns = os.popen('stty size', 'r').read().split()
-    elif os.name == 'nt':
-        try:
-            columns, rows = os.get_terminal_size(0)
-        except OSError:
-            columns, rows = os.get_terminal_size(1)
-    else:
-        columns = 50
-    l = int((int(columns) - len(class_name))/2)
-
-    print ('\n' + bc.HEADER + '-'*l + class_name + '-'*l + bc.ENDC)
-    print(bc.INFO + 'Downloading {} images.'.format(args.type_csv) + bc.ENDC)
+    # if os.name == 'posix':
+    #     rows, columns = os.popen('stty size', 'r').read().split()
+    # elif os.name == 'nt':
+    #     try:
+    #         columns, rows = os.get_terminal_size(0)
+    #     except OSError:
+    #         columns, rows = os.get_terminal_size(1)
+    # else:
+    #     columns = 50
+    # l = int((int(columns) - len(class_name))/2)
+    #
+    # print ('\n' + bc.HEADER + '-'*l + class_name + '-'*l + bc.ENDC)
+    # print(bc.INFO + 'Downloading {} images.'.format(args.type_csv) + bc.ENDC)
     df_val_images = images_options(df_val, args)
 
     images_list = df_val_images['ImageID'][df_val_images.LabelName == class_code].values
@@ -74,7 +75,7 @@ def download_img(folder, dataset_dir, class_name, images_list, threads):
         commands = []
         for image in images_list:
             path = image_dir + '/' + str(image) + '.jpg ' + '"' + download_dir + '"'
-            command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path                    
+            command = 'aws s3 --no-sign-request --only-show-errors cp s3://open-images-dataset/' + path
             commands.append(command)
 
         list(tqdm(pool.imap(os.system, commands), total = len(commands) ))

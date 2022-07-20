@@ -1,14 +1,14 @@
 import os
-from textwrap import dedent
+
 
 def images_options(df_val, args):
-    '''
+    """
     Manage the options for the images downloader.
 
     :param df_val: DataFrame Value.
     :param args: argument parser.
     :return: modified df_val
-    '''
+    """
     if args.image_IsOccluded is not None:
         rejectedID = df_val.ImageID[df_val.IsOccluded != int(args.image_IsOccluded)].values
         df_val = df_val[~df_val.ImageID.isin(rejectedID)]
@@ -31,19 +31,20 @@ def images_options(df_val, args):
 
     return df_val
 
+
 def mkdirs(Dataset_folder, csv_folder, classes, type_csv):
-    '''
+    """
     Make the folder structure for the system.
 
     :param Dataset_folder: Self explanatory
     :param csv_folder: folder path of csv files
     :param classes: list of classes to download
-    :param type_csv: train, validation, test or all 
+    :param type_csv: train, validation, test or all
     :return: None
-    '''
+    """
 
     directory_list = ['train', 'validation', 'test']
-    
+
     if not type_csv == 'all':
         for class_name in classes:
             if not Dataset_folder.endswith('_nl'):
@@ -72,14 +73,15 @@ def mkdirs(Dataset_folder, csv_folder, classes, type_csv):
     if not os.path.exists(csv_folder):
         os.makedirs(csv_folder)
 
+
 def progression_bar(total_images, index):
-    '''
+    """
     Print the progression bar for the download of the images.
 
     :param total_images: self explanatory
     :param index: self explanatory
     :return: None
-    '''
+    """
     # for windows os
     if os.name == 'nt':
         from ctypes import windll, create_string_buffer
@@ -107,18 +109,20 @@ def progression_bar(total_images, index):
     bar = "[{}{}] {}/{}".format('-' * index, ' ' * (toolbar_width - index), image_index, total_images)
     print(bar.rjust(int(columns)), end='\r')
 
+
 def show_classes(classes):
-    '''imag
+    """imag
     Show the downloaded classes in the selected folder during visualization mode
-    '''
+    """
     for n in classes:
         print("- {}".format(n))
     print("\n")
 
+
 def logo(command):
-    '''
+    """
     Print the logo for the downloader and the visualizer when selected
-    '''
+    """
     bc = bcolors
 
     print(bc.OKGREEN + """
@@ -165,9 +169,10 @@ def logo(command):
             
         ''' + bc.ENDC)
 
+
 class bcolors:
     HEADER = '\033[95m'
-    
+
     INFO = '    [INFO] | '
     OKBLUE = '\033[94m[DOWNLOAD] | '
     WARNING = '\033[93m    [WARN] | '

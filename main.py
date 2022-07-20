@@ -13,15 +13,9 @@ Licensed under the MIT License (see LICENSE for details)
 Usage:
 refer to README.md file
 """
-from sys import exit
-from textwrap import dedent
-from modules.parser import *
-from modules.utils import *
-from modules.downloader import *
-from modules.show import *
-from modules.csv_downloader import *
-from modules.bounding_boxes import *
-from modules.image_level import *
+from oidv4_toolkit.parser import *
+from oidv4_toolkit.bounding_boxes import *
+from oidv4_toolkit.image_level import *
 
 
 ROOT_DIR = ''
