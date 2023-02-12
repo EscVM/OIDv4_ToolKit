@@ -233,7 +233,12 @@ Hence with `d` (next), `a` (previous) and `q` (exit) you will be able to explore
   <img width="540" height="303" src="images/visualizer_example.gif">
 </p>
 
-# 5.0 Community Contributions
+# 5.0 Additionaly convert annotation into yolo format
+- Yolo is getting Popularity due to there ease of implementation
+- but to implemnt it need having a particular format of data 
+- You can implement ``` convert annotation.ipynb ``` file to convert annotation in form YOLO
+
+# 6.0 Community Contributions
 - [Denis Zuenko](https://github.com/zuenko) has added multithreading to the ToolKit and is currently working on the generalization and speeding up process of the labels creation
 - [Skylion007](https://github.com/Skylion007) has improved labels creation reducing the runtime from O(nm) to O(n). That massively speeds up label generation
 - [Alex March](https://github.com/hosaka) has added the limit option to the ToolKit in order to download only a maximum number of images of a certain class
